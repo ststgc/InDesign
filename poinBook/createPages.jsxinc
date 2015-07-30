@@ -17,21 +17,21 @@ var pageItemAuthorObject;
 var pageItemImagePath;
 var pageItemPath;
 var bookDataFilePath;
-var i, root, pageItemPositionCurrent, pageItemPositionCurrentObject;
+var i, root, pageItemPositionCurrent, pageItemCurrentObject;
 
 for (i = 0; i < bookData.pages.length; i++){
     myPages.add(); // create a new page
     pageItemPositionCurrent = 1 + i;
-    pageItemPositionCurrentObject = currentDoc.pages[pageItemPositionCurrent];
+    pageItemCurrentObject = currentDoc.pages[pageItemPositionCurrent];
 
 
 
     // Create each objects
-    pageItemBookTitleObject = pageItemPositionCurrentObject.textFrames.add();
-    pageItemImageObject = pageItemPositionCurrentObject.textFrames.add();
-    pageItemTitleObject = pageItemPositionCurrentObject.textFrames.add();
-    pageItemDetailLeftObject = pageItemPositionCurrentObject.textFrames.add();
-    pageItemDetailRightObject = pageItemPositionCurrentObject.textFrames.add();
+    pageItemBookTitleObject = pageItemCurrentObject.textFrames.add();
+    pageItemImageObject = pageItemCurrentObject.textFrames.add();
+    pageItemTitleObject = pageItemCurrentObject.textFrames.add();
+    pageItemDetailLeftObject = pageItemCurrentObject.textFrames.add();
+    pageItemDetailRightObject = pageItemCurrentObject.textFrames.add();
 
     // Set path
     bookDataFilePath = bookDataFile.path.replace(/~/, "Macintosh HD/Users/shota");
@@ -45,7 +45,7 @@ for (i = 0; i < bookData.pages.length; i++){
     };
 
     if (bookData.contributors.length != 0) {
-        pageItemAuthorObject = pageItemPositionCurrentObject.textFrames.add();
+        pageItemAuthorObject = pageItemCurrentObject.textFrames.add();
     }
 
 
