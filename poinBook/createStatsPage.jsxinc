@@ -1,0 +1,95 @@
+// Last page (title, author, stats, and QR code)
+// ----------------------------------------------
+
+// Create new page
+myPages.add(); // create a new page
+var pageLastPosition = 1 + bookData.pages.length;
+with (myDocument.pages[pageLastPosition].marginPreferences){
+    bottom = "4.25mm";
+    left = "4.25mm";
+    right = "4.25mm";
+    top = "4.25mm";
+    columnDirection = HorizontalOrVertical.HORIZONTAL;
+    columnCount = 2;
+    columnGutter = "3.244mm";
+}
+
+var pageLast = currentDoc.pages[pageLastPosition]
+
+// Draw gray line
+var pageLastLine = pageLast.rectangles.add();
+pageLastLine.geometricBounds = ["4.25mm", "96.167mm", "205.75mm", "96.267mm"];
+var setColor = [0, 0, 0, 10];
+var colorWhite = currentDoc.colors.add({
+    model: ColorModel.process,
+    space: ColorSpace.cmyk,
+    colorValue: setColor
+});
+pageLastLine.fillColor = colorWhite;
+pageLastLine.strokeWeight = "0";
+
+
+
+// book title
+var bookLastTitleObject = pageLast.textFrames.add();
+bookLastTitleObject.visibleBounds = ["5.009mm", "99.417mm", "9.4 mm", "143.75mm"];
+bookLastTitleObject.contents = bookData.book.title;
+bookLastTitleObject.paragraphs[0].justification = Justification.leftAlign;
+bookLastTitleObject.paragraphs[0].appliedFont = fontGennokakuGothic;
+bookLastTitleObject.paragraphs[0].pointSize = "10Q";
+bookLastTitleObject.paragraphs[0].leading = "3.25mm";
+bookLastTitleObject.paragraphs[0].fontStyle = "Medium";
+
+
+// book stats
+var bookStatsObject = pageLast.textFrames.add();
+bookStatsObject.visibleBounds = ["11.49mm", "99.417mm", "21.29mm", "143.75mm"];
+bookStatsObject.contents =
+    bookData.stats.page
+    + " Pages\n"
+    + bookData.stats.reaction
+    + " Reactions\n"
+    + bookData.stats.follower
+    + " Followers";
+bookStatsObject.paragraphs[0].justification = Justification.leftAlign;
+bookStatsObject.paragraphs[0].appliedFont = fontAvenirNext;
+bookStatsObject.paragraphs[0].pointSize = "10Q";
+bookStatsObject.paragraphs[0].leading = "3.25mm";
+bookStatsObject.paragraphs[0].fontStyle = "Regular";
+
+
+// book colophon
+var bookColophon = pageLast.textFrames.add();
+bookColophon.visibleBounds = ["24.497mm", "99.417mm", "31.5mm", "143.75mm"];
+bookColophon.contents =
+    "Author & text: "
+    + bookData.owner.name
+    + "\nPublished with: Poin Books";
+bookColophon.paragraphs[0].justification = Justification.leftAlign;
+bookColophon.paragraphs[0].appliedFont = fontAvenirNext;
+bookColophon.paragraphs[0].pointSize = "10Q";
+bookColophon.paragraphs[0].fontStyle = "Regular";
+bookColophon.paragraphs[0].leading = "3.25mm";
+
+
+// Place QR Code
+var bookQRImage = bookAssetsPath + bookId + "-bookQR.jpg";
+var bookQRImageObject = pageLast.textFrames.add();
+bookQRImageObject.visibleBounds = ["192.75mm", "130.823mm", "205.75mm", "143.75mm"];
+bookQRImageObject.contentType = ContentType.graphicType;
+bookQRImageObject.place(bookQRImage);
+bookQRImageObject.fit(FitOptions.proportionally);
+
+
+// QRMessage
+// TODO: Need to decode utf-8
+var bookQRMessage = "Read this QR code to open the book on Poin";
+var bookQRMessageObject = pageLast.textFrames.add();
+bookQRMessageObject.visibleBounds = ["200.625mm", "99.417mm", "206.375mm", "130mm"];
+bookQRMessageObject.contents = bookQRMessage;
+bookQRMessageObject.paragraphs[0].justification = Justification.leftAlign;
+bookQRMessageObject.paragraphs[0].pointSize = "8Q";
+bookQRMessageObject.paragraphs[0].appliedFont = fontGennokakuGothic;
+bookQRMessageObject.paragraphs[0].fontStyle = "Regular";
+bookQRMessageObject.paragraphs[0].leading = "3.25mm";
+

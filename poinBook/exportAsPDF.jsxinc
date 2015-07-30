@@ -1,0 +1,38 @@
+
+
+// # Export as PDF
+// -----------------------------------------------
+var bookTitle = bookData.book.title.replace(/\s+/g, '');
+var pdfFileName = bookTitle + ".pdf";
+var pdfSavePath = Folder.selectDialog(
+    "PDF保存場所を選択してください\n"
+    + "作成したInDesignデータから、入稿用PDFを作成します。保存したいフォルダを選択してください。"
+);
+currentDoc.exportFile(ExportFormat.PDF_TYPE, File(pdfFileName), true, undefined, undefined);
+
+
+// # Close the file at the end of the process
+// -----------------------------------------------
+
+bookDataFile.close(); // Close the file after reading
+
+
+
+// # Tell operator that your work is done
+// -----------------------------------------------
+
+alert(
+  "ご苦労さまでした。\n"
+  + "“" + bookDataFile.name + "” からのブック制作が終わりました。"
+  + "最後お手数ですが、以下の点を確認・修正をお願いします。\n\n"
+  + "- Descriptionが長いページ\n"
+  + "- テキストの配置位置・サイズ\n"
+);
+
+
+
+
+// # Close without saving
+// -----------------------------------------------
+// currentDoc.exit(saveOptions.no);
+

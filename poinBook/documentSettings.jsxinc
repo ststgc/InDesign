@@ -1,0 +1,36 @@
+
+
+// # Document Settings
+// ----------------------------
+
+
+// Create new page for Poin Book
+var myDocument = app.documents.add();
+
+// Set the size of the book
+with (myDocument.documentPreferences){ // Create A5 document
+    pageHeight = "210mm";
+    pageWidth = "148mm";
+    pageOrientation = PageOrientation.portrait;
+    facingPages = false;
+}
+
+
+// Set grids
+myDocument.viewPreferences.horizontalMeasurementUnits = MeasurementUnits.millimeters;
+myDocument.viewPreferences.verticalMeasurementUnits = MeasurementUnits.millimeters;
+with (myDocument.guidePreferences){
+    guidesInBack = true;
+    guideLocked = true;
+    guidesShown = true;
+    guidesSnapTo = true;
+}
+with (myDocument.gridPreferences){
+    baselineStart = 0;
+    baselineDivision = 3.25;
+    baselineShown = true;
+    baselineGridShown = true;
+    documentGridSnapto = true;
+    baselineGridRelativeOption = BaselineGridRelativeOption.TOP_OF_MARGIN_OF_BASELINE_GRID_RELATIVE_OPTION;
+}
+

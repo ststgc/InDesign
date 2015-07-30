@@ -1,0 +1,11 @@
+// # BookData
+// ----------------------------
+
+
+var bookDataFile = File.openDialog("ブックのJSONファイルを選択してください");
+var flag = bookDataFile.open("r");
+
+if (flag == true){
+    var data = bookDataFile.read(); // its still just string object
+    var bookData = eval("(" + data + ")"); // change from string to json object
+}

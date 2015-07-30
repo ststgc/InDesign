@@ -1,0 +1,129 @@
+
+// #TODO
+// あふれたテキストをふた手に分かれて
+// タイトルが二行にわたるとき
+
+
+
+// # Start creating page items
+// ----------------------------
+
+var pageItemBookTitleObject;
+var pageItemImageObject;
+var pageItemTitleObject;
+var pageItemDetailObject;
+var pageItemAuthorObject;
+var pageItemImagePath;
+var i, pageItemPositionCurrent, pageItemPositionCurrentObject;
+
+for (i = 0; i < bookData.pages.length; i++){
+    myPages.add(); // create a new page
+    pageItemPositionCurrent = 1 + i;
+    pageItemPositionCurrentObject = currentDoc.pages[pageItemPositionCurrent];
+
+
+
+    // Create each objects
+    pageItemBookTitleObject = pageItemPositionCurrentObject.textFrames.add();
+    pageItemImageObject = pageItemPositionCurrentObject.textFrames.add();
+    pageItemTitleObject = pageItemPositionCurrentObject.textFrames.add();
+    pageItemDetailObject = pageItemPositionCurrentObject.textFrames.add();
+
+    if (bookData.contributors.length != 0) {
+        pageItemAuthorObject = pageItemPositionCurrentObject.textFrames.add();
+    }
+
+
+    if (i % 2 === 0){ // Even page a.k.a. page on your left hand
+        // Set margins
+        with (myDocument.pages[pageItemPositionCurrent].marginPreferences){
+            columnDirection = HorizontalOrVertical.HORIZONTAL;
+            columnCount = 2;
+            columnGutter = "3.25mm";
+            bottom = "4.25mm";
+            left = "4.25mm";
+            right = "8.25mm";
+            top = "4.25mm";
+        }
+
+        pageItemBookTitle.visibleBounds = ["2.5mm", "4.25mm", "5.3mm", "140mm"];
+        pageItemImageObject.visibleBounds = ["7.5mm", "4.25mm", "142.934mm", "139.75mm"];
+        pageItemTitleObject.visibleBounds = ["147mm", "4.25mm", "151.5mm", "70.375mm"];
+        pageItemDetailObject.visibleBounds = ["158mm", "4.25mm", "205.75mm", "70.375mm"];
+        if (bookData.contributors.length != 0) {
+            pageItemAuthorObject.visibleBounds = ["153.25mm", "4.25mm", "156.5mm", "70.375mm"];
+        }
+
+
+    } else { // Odd page a.k.a. page on your right hand
+
+        // Set margins
+        with (myDocument.pages[pageItemPositionCurrent].marginPreferences){
+            columnDirection = HorizontalOrVertical.HORIZONTAL;
+            columnCount = 2;
+            columnGutter = "3.25mm";
+            bottom = "4.25mm";
+            left = "8.25mm";
+            right = "4.25mm";
+            top = "4.25mm";
+        }
+
+        pageItemBookTitle.visibleBounds = ["2.569mm", "8.25mm", "6mm", "143.75mm"];
+        pageItemImageObject.visibleBounds = ["7.5mm", "8.25mm", "142.934mm", "143.75mm"];
+        pageItemTitleObject.visibleBounds = ["146.751mm", "8.25mm", "151mm", "74.375mm"];
+        pageItemDetailObject.visibleBounds = ["158mm", "8.25mm", "205.75mm", "74.375mm"];
+        if (bookData.contributors.length != 0) {
+            pageItemAuthorObject.visibleBounds = ["153.25mm", "8.25mm", "156.5mm", "74.75mm"];
+        }
+
+    }
+
+
+    // Place page book title
+    pageItemBookTitle.contents = bookData.book.title;
+    pageItemBookTitle.paragraphs[0].justification = Justification.leftAlign;
+    pageItemBookTitle.paragraphs[0].appliedFont = fontGennokakuGothic;
+    pageItemBookTitle.paragraphs[0].fontStyle = "Medium";
+    pageItemBookTitle.paragraphs[0].pointSize = "8Q";
+    pageItemBookTitle.paragraphs[0].tracking = 300;
+
+    // Place page image
+    pageItemImagePath = bookAssetsPath + bookId + "-page-" + i + ".jpg";
+    pageItemImageObject.contentType = ContentType.graphicType;
+    pageItemImageObject.place(pageItemImagePath);
+    pageItemImageObject.fit(FitOptions.proportionally);
+
+    // Place page title
+    pageItemTitleObject.contents = bookData.pages[i].name;
+    pageItemTitleObject.paragraphs[0].justification = Justification.leftAlign;
+    pageItemTitleObject.paragraphs[0].appliedFont = fontGennokakuGothic;
+    pageItemTitleObject.paragraphs[0].fontStyle = "Regular";
+    pageItemTitleObject.paragraphs[0].pointSize = "16Q";
+
+    // Place page owner name (= author)
+    if (bookData.contributors.length != 0) {
+        if (bookData.pages[i].owner){
+            pageItemAuthorObject.contents = "Written by " + bookData.pages[i].owner.name;
+        } else {
+            pageItemAuthorObject.contents = "Written by " + bookData.owner.name;
+        }
+        pageItemAuthorObject.paragraphs[0].justification = Justification.leftAlign;
+        pageItemAuthorObject.paragraphs[0].appliedFont = fontGennokakuGothic;
+        pageItemAuthorObject.paragraphs[0].leading = "3.25mm";
+        pageItemAuthorObject.paragraphs[0].fontStyle = "Regular";
+        pageItemAuthorObject.paragraphs[0].pointSize = "8Q";
+    }
+
+
+    // Place page detail
+    if (bookData.pages[i].description) {
+        pageItemDetailObject.contents = bookData.pages[i].description;
+        pageItemDetailObject.paragraphs[0].justification = Justification.leftAlign;
+        pageItemDetailObject.paragraphs[0].appliedFont = fontGennokakuGothic;
+        pageItemDetailObject.paragraphs[0].leading = "3.25mm";
+        pageItemDetailObject.paragraphs[0].fontStyle = "Regular";
+        pageItemDetailObject.paragraphs[0].pointSize = "10Q";
+    }
+
+}
+

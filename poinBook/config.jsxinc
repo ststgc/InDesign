@@ -1,0 +1,13 @@
+// # Configuration
+
+
+// Settings before everything
+var currentDoc = app.activeDocument;
+var fontAvenirNext = app.fonts.item("Avenir Next");
+var fontGennokakuGothic = app.fonts.item("源ノ角ゴシック");
+var bookId = bookData.book.bookId;
+var bookAssets = new Folder('~/Downloads/poinBookAssets/');
+if (!bookAssets.exists) bookAssets.create();
+var bookAssetsPath = "Macintosh HD/Users/shota/Downloads/poinBookAssets/";
+var bookCoverImage = bookAssetsPath + bookId + "-bookCover.jpg";
+
