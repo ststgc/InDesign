@@ -11,10 +11,13 @@
 var pageItemBookTitleObject;
 var pageItemImageObject;
 var pageItemTitleObject;
-var pageItemDetailObject;
+var pageItemDetailLeftObject;
+var pageItemDetailRightObject;
 var pageItemAuthorObject;
 var pageItemImagePath;
-var i, pageItemPositionCurrent, pageItemPositionCurrentObject;
+var pageItemPath;
+var bookDataFilePath;
+var i, root, pageItemPositionCurrent, pageItemPositionCurrentObject;
 
 for (i = 0; i < bookData.pages.length; i++){
     myPages.add(); // create a new page
@@ -27,7 +30,19 @@ for (i = 0; i < bookData.pages.length; i++){
     pageItemBookTitleObject = pageItemPositionCurrentObject.textFrames.add();
     pageItemImageObject = pageItemPositionCurrentObject.textFrames.add();
     pageItemTitleObject = pageItemPositionCurrentObject.textFrames.add();
-    pageItemDetailObject = pageItemPositionCurrentObject.textFrames.add();
+    pageItemDetailLeftObject = pageItemPositionCurrentObject.textFrames.add();
+    pageItemDetailRightObject = pageItemPositionCurrentObject.textFrames.add();
+
+    // Set path
+    bookDataFilePath = bookDataFile.path.replace(/~/, "Macintosh HD/Users/shota");
+    root = bookDataFilePath + "/img/" + bookData.pages[i].pageId;
+
+    pageItemImagePath = {
+        image: bookAssetsPath + bookId + "-page-" + i + ".jpg",
+        title: root + "/title.png",
+        detailLeft: root + "/left.png",
+        detailRight: root + "/right.png"
+    };
 
     if (bookData.contributors.length != 0) {
         pageItemAuthorObject = pageItemPositionCurrentObject.textFrames.add();
@@ -46,10 +61,11 @@ for (i = 0; i < bookData.pages.length; i++){
             top = "4.25mm";
         }
 
-        pageItemBookTitle.visibleBounds = ["2.5mm", "4.25mm", "5.3mm", "140mm"];
+        pageItemBookTitleObject.visibleBounds = ["2.5mm", "4.25mm", "5.3mm", "140mm"];
         pageItemImageObject.visibleBounds = ["7.5mm", "4.25mm", "142.934mm", "139.75mm"];
         pageItemTitleObject.visibleBounds = ["147mm", "4.25mm", "151.5mm", "70.375mm"];
-        pageItemDetailObject.visibleBounds = ["158mm", "4.25mm", "205.75mm", "70.375mm"];
+        pageItemDetailLeftObject.visibleBounds = ["158mm", "4.25mm", "205.75mm", "70.375mm"];
+        pageItemDetailRightObject.visibleBounds = ["147.25mm", "73.625mm", "205.75mm", "139.75mm"];
         if (bookData.contributors.length != 0) {
             pageItemAuthorObject.visibleBounds = ["153.25mm", "4.25mm", "156.5mm", "70.375mm"];
         }
@@ -68,10 +84,11 @@ for (i = 0; i < bookData.pages.length; i++){
             top = "4.25mm";
         }
 
-        pageItemBookTitle.visibleBounds = ["2.569mm", "8.25mm", "6mm", "143.75mm"];
+        pageItemBookTitleObject.visibleBounds = ["2.569mm", "8.25mm", "6mm", "143.75mm"];
         pageItemImageObject.visibleBounds = ["7.5mm", "8.25mm", "142.934mm", "143.75mm"];
         pageItemTitleObject.visibleBounds = ["146.751mm", "8.25mm", "151mm", "74.375mm"];
-        pageItemDetailObject.visibleBounds = ["158mm", "8.25mm", "205.75mm", "74.375mm"];
+        pageItemDetailLeftObject.visibleBounds = ["158mm", "8.25mm", "205.75mm", "74.375mm"];
+        pageItemDetailRightObject.visibleBounds = ["147.25mm", "77.625mm", "205.75mm", "143.75mm"];
         if (bookData.contributors.length != 0) {
             pageItemAuthorObject.visibleBounds = ["153.25mm", "8.25mm", "156.5mm", "74.75mm"];
         }
@@ -80,25 +97,28 @@ for (i = 0; i < bookData.pages.length; i++){
 
 
     // Place page book title
-    pageItemBookTitle.contents = bookData.book.title;
-    pageItemBookTitle.paragraphs[0].justification = Justification.leftAlign;
-    pageItemBookTitle.paragraphs[0].appliedFont = fontGennokakuGothic;
-    pageItemBookTitle.paragraphs[0].fontStyle = "Medium";
-    pageItemBookTitle.paragraphs[0].pointSize = "8Q";
-    pageItemBookTitle.paragraphs[0].tracking = 300;
+    pageItemBookTitleObject.contents = bookData.book.title;
+    pageItemBookTitleObject.paragraphs[0].justification = Justification.leftAlign;
+    pageItemBookTitleObject.paragraphs[0].appliedFont = fontGennokakuGothic;
+    pageItemBookTitleObject.paragraphs[0].fontStyle = "Medium";
+    pageItemBookTitleObject.paragraphs[0].pointSize = "8Q";
+    pageItemBookTitleObject.paragraphs[0].tracking = 300;
 
     // Place page image
-    pageItemImagePath = bookAssetsPath + bookId + "-page-" + i + ".jpg";
     pageItemImageObject.contentType = ContentType.graphicType;
-    pageItemImageObject.place(pageItemImagePath);
+    pageItemImageObject.place(pageItemImagePath.image);
     pageItemImageObject.fit(FitOptions.proportionally);
 
     // Place page title
-    pageItemTitleObject.contents = bookData.pages[i].name;
-    pageItemTitleObject.paragraphs[0].justification = Justification.leftAlign;
-    pageItemTitleObject.paragraphs[0].appliedFont = fontGennokakuGothic;
-    pageItemTitleObject.paragraphs[0].fontStyle = "Regular";
-    pageItemTitleObject.paragraphs[0].pointSize = "16Q";
+    pageItemTitleObject.contentType = ContentType.graphicType;
+    pageItemTitleObject.place(pageItemImagePath.title);
+    pageItemTitleObject.fit(FitOptions.proportionally);
+
+    // pageItemTitleObject.contents = bookData.pages[i].name;
+    // pageItemTitleObject.paragraphs[0].justification = Justification.leftAlign;
+    // pageItemTitleObject.paragraphs[0].appliedFont = fontGennokakuGothic;
+    // pageItemTitleObject.paragraphs[0].fontStyle = "Regular";
+    // pageItemTitleObject.paragraphs[0].pointSize = "16Q";
 
     // Place page owner name (= author)
     if (bookData.contributors.length != 0) {
@@ -117,12 +137,25 @@ for (i = 0; i < bookData.pages.length; i++){
 
     // Place page detail
     if (bookData.pages[i].description) {
-        pageItemDetailObject.contents = bookData.pages[i].description;
-        pageItemDetailObject.paragraphs[0].justification = Justification.leftAlign;
-        pageItemDetailObject.paragraphs[0].appliedFont = fontGennokakuGothic;
-        pageItemDetailObject.paragraphs[0].leading = "3.25mm";
-        pageItemDetailObject.paragraphs[0].fontStyle = "Regular";
-        pageItemDetailObject.paragraphs[0].pointSize = "10Q";
+
+        // Left
+        pageItemDetailLeftObject.contentType = ContentType.graphicType;
+        pageItemDetailLeftObject.place(pageItemImagePath.detailLeft);
+        pageItemDetailLeftObject.fit(FitOptions.proportionally);
+
+        // Right
+        pageItemDetailRightObject.contentType = ContentType.graphicType;
+        pageItemDetailRightObject.place(pageItemImagePath.detailRight);
+        pageItemDetailRightObject.fit(FitOptions.proportionally);
+
+
+
+        // pageItemDetailObject.contents = bookData.pages[i].description;
+        // pageItemDetailObject.paragraphs[0].justification = Justification.leftAlign;
+        // pageItemDetailObject.paragraphs[0].appliedFont = fontGennokakuGothic;
+        // pageItemDetailObject.paragraphs[0].leading = "3.25mm";
+        // pageItemDetailObject.paragraphs[0].fontStyle = "Regular";
+        // pageItemDetailObject.paragraphs[0].pointSize = "10Q";
     }
 
 }
