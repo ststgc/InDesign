@@ -35,13 +35,15 @@ for (i = 0; i < bookData.pages.length; i++){
 
     // Set path
     bookDataFilePath = bookDataFile.path.replace(/~/, "Macintosh HD/Users/shota");
-    root = bookDataFilePath + "/img/" + bookData.pages[i].pageId;
+    root = bookDataFilePath + "/img";
+    rootPage = root + "/pages/" + bookData.pages[i].pageId;
 
     pageItemImagePath = {
+        bookTitle: root + "/bookTitleForPage.png",
         image: bookAssetsPath + bookId + "-page-" + i + ".jpg",
-        title: root + "/title.png",
-        detailLeft: root + "/left.png",
-        detailRight: root + "/right.png"
+        title: rootPage + "/title.png",
+        detailLeft: rootPage + "/left.png",
+        detailRight: rootPage + "/right.png"
     };
 
     if (bookData.contributors.length != 0) {
@@ -97,12 +99,10 @@ for (i = 0; i < bookData.pages.length; i++){
 
 
     // Place page book title
-    pageItemBookTitleObject.contents = bookData.book.title;
-    pageItemBookTitleObject.paragraphs[0].justification = Justification.leftAlign;
-    pageItemBookTitleObject.paragraphs[0].appliedFont = fontGennokakuGothic;
-    pageItemBookTitleObject.paragraphs[0].fontStyle = "Medium";
-    pageItemBookTitleObject.paragraphs[0].pointSize = "8Q";
-    pageItemBookTitleObject.paragraphs[0].tracking = 300;
+    pageItemBookTitleObject.contentType = ContentType.graphicType;
+    pageItemBookTitleObject.place(pageItemImagePath.bookTitle);
+    pageItemBookTitleObject.fit(FitOptions.proportionally);
+
 
     // Place page image
     pageItemImageObject.contentType = ContentType.graphicType;
@@ -114,11 +114,6 @@ for (i = 0; i < bookData.pages.length; i++){
     pageItemTitleObject.place(pageItemImagePath.title);
     pageItemTitleObject.fit(FitOptions.proportionally);
 
-    // pageItemTitleObject.contents = bookData.pages[i].name;
-    // pageItemTitleObject.paragraphs[0].justification = Justification.leftAlign;
-    // pageItemTitleObject.paragraphs[0].appliedFont = fontGennokakuGothic;
-    // pageItemTitleObject.paragraphs[0].fontStyle = "Regular";
-    // pageItemTitleObject.paragraphs[0].pointSize = "16Q";
 
     // Place page owner name (= author)
     if (bookData.contributors.length != 0) {
@@ -148,14 +143,6 @@ for (i = 0; i < bookData.pages.length; i++){
         pageItemDetailRightObject.place(pageItemImagePath.detailRight);
         pageItemDetailRightObject.fit(FitOptions.proportionally);
 
-
-
-        // pageItemDetailObject.contents = bookData.pages[i].description;
-        // pageItemDetailObject.paragraphs[0].justification = Justification.leftAlign;
-        // pageItemDetailObject.paragraphs[0].appliedFont = fontGennokakuGothic;
-        // pageItemDetailObject.paragraphs[0].leading = "3.25mm";
-        // pageItemDetailObject.paragraphs[0].fontStyle = "Regular";
-        // pageItemDetailObject.paragraphs[0].pointSize = "10Q";
     }
 
 }
