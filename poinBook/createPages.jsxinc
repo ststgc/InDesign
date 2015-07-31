@@ -35,11 +35,11 @@ for (i = 0; i < bookData.pages.length; i++){
 
     // Set path
     bookDataFilePath = bookDataFile.path.replace(/~/, "Macintosh HD/Users/shota");
-    root = bookDataFilePath + "/img";
-    rootPage = root + "/pages/" + bookData.pages[i].pageId;
+    root = bookDataFilePath + "/img/";
+    rootPage = root + "pages/" + bookData.pages[i].pageId;
 
     pageItemImagePath = {
-        bookTitle: root + "/bookTitleForPage.png",
+        bookTitle: root + "bookTitleForPage.png",
         image: bookAssetsPath + bookId + "-page-" + i + ".jpg",
         title: rootPage + "/title.png",
         detailLeft: rootPage + "/left.png",
@@ -63,9 +63,9 @@ for (i = 0; i < bookData.pages.length; i++){
             top = "4.25mm";
         }
 
-        pageItemBookTitleObject.visibleBounds = ["2.5mm", "4.25mm", "5.3mm", "140mm"];
+        pageItemBookTitleObject.visibleBounds = ["1mm", "4.25mm", "6mm", "139.8mm"];
         pageItemImageObject.visibleBounds = ["7.5mm", "4.25mm", "142.934mm", "139.75mm"];
-        pageItemTitleObject.visibleBounds = ["147mm", "4.25mm", "151.5mm", "70.375mm"];
+        pageItemTitleObject.visibleBounds = ["145.7mm", "4.25mm", "151.5mm", "70.375mm"];
         pageItemDetailLeftObject.visibleBounds = ["158mm", "4.25mm", "205.75mm", "70.375mm"];
         pageItemDetailRightObject.visibleBounds = ["147.25mm", "73.625mm", "205.75mm", "139.75mm"];
         if (bookData.contributors.length != 0) {
@@ -86,7 +86,7 @@ for (i = 0; i < bookData.pages.length; i++){
             top = "4.25mm";
         }
 
-        pageItemBookTitleObject.visibleBounds = ["2.569mm", "8.25mm", "6mm", "143.75mm"];
+        pageItemBookTitleObject.visibleBounds = ["1mm", "8.25mm", "6mm", "143.75mm"];
         pageItemImageObject.visibleBounds = ["7.5mm", "8.25mm", "142.934mm", "143.75mm"];
         pageItemTitleObject.visibleBounds = ["146.751mm", "8.25mm", "151mm", "74.375mm"];
         pageItemDetailLeftObject.visibleBounds = ["158mm", "8.25mm", "205.75mm", "74.375mm"];

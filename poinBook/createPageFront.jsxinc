@@ -14,44 +14,35 @@ with (myDocument.pages.item(0).marginPreferences){
 }
 var pageFront = currentDoc.pages.item(0);
 
+
+// Set path
+var bookDataFilePath = bookDataFile.path.replace(/~/, "Macintosh HD/Users/shota");
+var root = bookDataFilePath + "/img/";
+var pageFrontImagePath = {
+    author: root + "frontPageAuthorName.png",
+    title: root + "frontPageTitle.png",
+    description: root + "frontPageDescription.png"
+};
+
+
 // Place book title
 var bookCoverTextBoxes = [
-    [101.001, 34.356, 107.5, 113.643, bookData.book.title], // book title [y1, x1, y2, x2]
-    [106.126, 34.356, 109.376, 113.643, "by " + bookData.owner.name], // author title
-    [112.558, 4.25, 158, 143.646, "* * *\n" + bookData.book.description] // book description
+    [101.001, 34.356, 107.5, 113.643, pageFrontImagePath.title], // book title [y1, x1, y2, x2]
+    [106.126, 34.356, 109.376, 113.643, pageFrontImagePath.author], // author title
+    [112.558, 4.25, 158, 143.646, pageFrontImagePath.description] // book description];
 ];
 
-
 var i, y1, x1, y2, x2, setColor, colorGray;
-for (var i = 0; i < bookCoverTextBoxes.length ; i++){
-    var y1 = bookCoverTextBoxes[i][0] + "mm";
-    var x1 = bookCoverTextBoxes[i][1] + "mm";
-    var y2 = bookCoverTextBoxes[i][2] + "mm";
-    var x2 = bookCoverTextBoxes[i][3] + "mm";
+for (i = 0; i < bookCoverTextBoxes.length ; i++){
+    y1 = bookCoverTextBoxes[i][0] + "mm";
+    x1 = bookCoverTextBoxes[i][1] + "mm";
+    y2 = bookCoverTextBoxes[i][2] + "mm";
+    x2 = bookCoverTextBoxes[i][3] + "mm";
     bookCoverTextObject = pageFront.textFrames.add();
-    bookCoverTextObject.visibleBounds = [x1, y1, x2, y2];
-    bookCoverTextObject.contents = bookCoverTextBoxes[i][4];
-    bookCoverTextObject.paragraphs[0].justification = Justification.centerAlign;
-
-    // adjust font size for book title
-    if (i == 0){
-        bookCoverTextObject.paragraphs[0].pointSize = "16Q";
-        bookCoverTextObject.paragraphs[0].appliedFont = fontGennokakuGothic;
-        bookCoverTextObject.paragraphs[0].fontStyle = "Bold";
-        bookCoverTextObject.paragraphs[0].tracking = 300;
-    } else if (i == 1) {  // adjust font size for author name
-        bookCoverTextObject.paragraphs[0].pointSize = "13Q";
-        bookCoverTextObject.paragraphs[0].appliedFont = fontGennokakuGothic;
-        bookCoverTextObject.paragraphs[0].fontStyle = "Regular";
-    } else { // for book description
-        setColor = [0,0,0,60];
-        colorGray = currentDoc.colors.add({model:ColorModel.process,space:ColorSpace.cmyk,colorValue:setColor});
-        bookCoverTextObject.paragraphs[0].pointSize = "10Q";
-        bookCoverTextObject.paragraphs[0].leading = "3.25mm";
-        bookCoverTextObject.paragraphs[0].appliedFont = fontGennokakuGothic;
-        bookCoverTextObject.paragraphs[0].fontStyle = "Regular";
-        bookCoverTextObject.paragraphs[0].fillColor = colorGray;
-    }
+    bookCoverTextObject.visibleBounds = [y1, x1, y2, x2];
+    bookCoverTextObject.contentType = ContentType.graphicType;
+    bookCoverTextObject.place(bookCoverTextBoxes[i][4]);
+    bookCoverTextObject.fit(FitOptions.proportionally);
 }
 
 
