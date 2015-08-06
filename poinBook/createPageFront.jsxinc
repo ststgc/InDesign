@@ -28,8 +28,8 @@ var pageFrontImagePath = {
 // Place book title
 var bookCoverTextBoxes = [
     [101.001, 34.356, 107.5, 113.643, pageFrontImagePath.title], // book title [y1, x1, y2, x2]
-    [106.126, 34.356, 109.376, 113.643, pageFrontImagePath.author], // author title
-    [112.558, 4.25, 158, 143.646, pageFrontImagePath.description] // book description];
+    [107.192, 39.15, 112.308, 109.092, pageFrontImagePath.author], // author title
+    [114.808, 4.25, 160.25, 143.646, pageFrontImagePath.description] // book description];
 ];
 
 var i, y1, x1, y2, x2, setColor, colorGray;

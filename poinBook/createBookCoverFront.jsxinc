@@ -6,84 +6,84 @@
 
 // Set margin and gutter
 // *You need to set margin and gutter per pages.
-// with (myDocument.pages.item(0).marginPreferences){
-//     columnCount = 2;
-//     columnGutter = "3.25mm";
-//     bottom = "4.25mm";
-//     left = "4.25mm";
-//     right = "4.25mm";
-//     top = "4.25mm";
-// }
+with (myDocument.pages.item(0).marginPreferences){
+    columnCount = 2;
+    columnGutter = "3.25mm";
+    bottom = "4.25mm";
+    left = "4.25mm";
+    right = "4.25mm";
+    top = "4.25mm";
+}
 
 
 
-// var bookCoverImageObject = currentDoc.textFrames.add();
-// bookCoverImageObject.visibleBounds = ["4.25mm", "4.25mm", "205.75mm", "143.75mm"];
-// bookCoverImageObject.contentType = ContentType.graphicType;
-// bookCoverImageObject.place(bookCoverImage);
-// bookCoverImageObject.fit(FitOptions.proportionally);
+var bookCoverImageObject = currentDoc.textFrames.add();
+bookCoverImageObject.visibleBounds = ["4.25mm", "4.25mm", "205.75mm", "143.75mm"];
+bookCoverImageObject.contentType = ContentType.graphicType;
+bookCoverImageObject.place(bookCoverImage);
+bookCoverImageObject.fit(FitOptions.proportionally);
 
 
-// // Draw book title holder
-// bookCoverTitleHolderBoxes = [
-//     [92, 33.073, 117.982, 114.928], // outer white box
-//     [92.865, 33.866, 117.169, 114.18], // inner stroke
-//     [93.236, 34.292, 116.763, 113.709] // second inner stroke
-// ]
+// Draw book title holder
+bookCoverTitleHolderBoxes = [
+    [92, 33.073, 117.982, 114.928], // outer white box
+    [92.865, 33.866, 117.169, 114.18], // inner stroke
+    [93.236, 34.292, 116.763, 113.709] // second inner stroke
+]
 
-// var i, y1, x1, y2, x2, setColor, colorWhite;
-// for (i = 0; i < bookCoverTitleHolderBoxes.length; i++){
-//     y1 = bookCoverTitleHolderBoxes[i][0];
-//     x1 = bookCoverTitleHolderBoxes[i][1];
-//     y2 = bookCoverTitleHolderBoxes[i][2];
-//     x2 = bookCoverTitleHolderBoxes[i][3];
-//     bookCoverTitleHolder = currentDoc.rectangles.add();
-//     bookCoverTitleHolder.geometricBounds = [y1, x1, y2, x2];
-//     if (i == 0){ // outer white box
-//         setColor = [0, 0, 0, 0];
-//         colorWhite = currentDoc.colors.add({
-//             model: ColorModel.process,
-//             space: ColorSpace.cmyk,
-//             colorValue: setColor
-//         });
-//         bookCoverTitleHolder.fillColor = colorWhite;
-//         bookCoverTitleHolder.strokeWeight = "0";
-//     } else { // inner stroke
-//         bookCoverTitleHolder.strokeWeight = "0.1mm";
-//     }
-// }
+var i, y1, x1, y2, x2, setColor, colorWhite;
+for (i = 0; i < bookCoverTitleHolderBoxes.length; i++){
+    y1 = bookCoverTitleHolderBoxes[i][0];
+    x1 = bookCoverTitleHolderBoxes[i][1];
+    y2 = bookCoverTitleHolderBoxes[i][2];
+    x2 = bookCoverTitleHolderBoxes[i][3];
+    bookCoverTitleHolder = currentDoc.rectangles.add();
+    bookCoverTitleHolder.geometricBounds = [y1, x1, y2, x2];
+    if (i == 0){ // outer white box
+        setColor = [0, 0, 0, 0];
+        colorWhite = currentDoc.colors.add({
+            model: ColorModel.process,
+            space: ColorSpace.cmyk,
+            colorValue: setColor
+        });
+        bookCoverTitleHolder.fillColor = colorWhite;
+        bookCoverTitleHolder.strokeWeight = "0";
+    } else { // inner stroke
+        bookCoverTitleHolder.strokeWeight = "0.1mm";
+    }
+}
 
 
-// // Place book title
-// var currentDoc = app.activeDocument;
-// var bookCoverTextBoxes = [
-//     [101.001, 34.356, 107.5, 113.643, bookData.book.title], // book title [y1, x1, y2, x2]
-//     [106.126, 34.356, 109.376, 113.643, "by " + bookData.owner.name] // author title
-// ];
+// Place book title
+var currentDoc = app.activeDocument;
+var bookCoverTextBoxes = [
+    [101.001, 34.356, 107.5, 113.643, bookData.book.title], // book title [y1, x1, y2, x2]
+    [106.126, 34.356, 109.376, 113.643, "by " + bookData.owner.name] // author title
+];
 
-// var i, y1, x1, y2, x2, bookCoverTextObject;
-// for (i = 0; i < bookCoverTextBoxes.length ; i++){
-//     y1 = bookCoverTextBoxes[i][0] + "mm";
-//     x1 = bookCoverTextBoxes[i][1] + "mm";
-//     y2 = bookCoverTextBoxes[i][2] + "mm";
-//     x2 = bookCoverTextBoxes[i][3] + "mm";
-//     bookCoverTextObject = currentDoc.textFrames.add();
-//     bookCoverTextObject.visibleBounds = [x1, y1, x2, y2];
-//     bookCoverTextObject.contents = bookCoverTextBoxes[i][4];
-//     bookCoverTextObject.paragraphs[0].justification = Justification.centerAlign;
+var i, y1, x1, y2, x2, bookCoverTextObject;
+for (i = 0; i < bookCoverTextBoxes.length ; i++){
+    y1 = bookCoverTextBoxes[i][0] + "mm";
+    x1 = bookCoverTextBoxes[i][1] + "mm";
+    y2 = bookCoverTextBoxes[i][2] + "mm";
+    x2 = bookCoverTextBoxes[i][3] + "mm";
+    bookCoverTextObject = currentDoc.textFrames.add();
+    bookCoverTextObject.visibleBounds = [x1, y1, x2, y2];
+    bookCoverTextObject.contents = bookCoverTextBoxes[i][4];
+    bookCoverTextObject.paragraphs[0].justification = Justification.centerAlign;
 
-//     // adjust font size for book title
-//     if (i == 0){
-//         bookCoverTextObject.paragraphs[0].pointSize = "16Q";
-//         bookCoverTextObject.paragraphs[0].appliedFont = fontGennokakuGothic;
-//         bookCoverTextObject.paragraphs[0].fontStyle = "Bold";
-//         bookCoverTextObject.paragraphs[0].tracking = 300;
-//     } else {  // adjust font size for author name
-//         bookCoverTextObject.paragraphs[0].pointSize = "13Q";
-//         bookCoverTextObject.paragraphs[0].appliedFont = fontGennokakuGothic;
-//         bookCoverTextObject.paragraphs[0].fontStyle = "Regular";
-//     }
-// }
+    // adjust font size for book title
+    if (i == 0){
+        bookCoverTextObject.paragraphs[0].pointSize = "16Q";
+        bookCoverTextObject.paragraphs[0].appliedFont = fontGennokakuGothic;
+        bookCoverTextObject.paragraphs[0].fontStyle = "Bold";
+        bookCoverTextObject.paragraphs[0].tracking = 300;
+    } else {  // adjust font size for author name
+        bookCoverTextObject.paragraphs[0].pointSize = "13Q";
+        bookCoverTextObject.paragraphs[0].appliedFont = fontGennokakuGothic;
+        bookCoverTextObject.paragraphs[0].fontStyle = "Regular";
+    }
+}
 
 
 

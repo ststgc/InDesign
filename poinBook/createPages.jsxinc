@@ -1,9 +1,4 @@
 
-// #TODO
-// あふれたテキストをふた手に分かれて
-// タイトルが二行にわたるとき
-
-
 
 // # Start creating page items
 // ----------------------------
@@ -11,25 +6,28 @@
 var pageItemBookTitleObject;
 var pageItemImageObject;
 var pageItemTitleObject;
+var pageItemDateObject;
 var pageItemDetailLeftObject;
 var pageItemDetailRightObject;
 var pageItemAuthorObject;
 var pageItemImagePath;
 var pageItemPath;
 var bookDataFilePath;
+var pageItemPageNumberRight, pageItemPageNumberLeft;
+var setColor, colorGray;
+var checkExistsDetailLeft, checkExistsDetailRight;
 var i, root, pageItemPositionCurrent, pageItemCurrentObject;
+
 
 for (i = 0; i < bookData.pages.length; i++){
     myPages.add(); // create a new page
     pageItemPositionCurrent = 1 + i;
     pageItemCurrentObject = currentDoc.pages[pageItemPositionCurrent];
 
-
-
     // Create each objects
-    pageItemBookTitleObject = pageItemCurrentObject.textFrames.add();
     pageItemImageObject = pageItemCurrentObject.textFrames.add();
     pageItemTitleObject = pageItemCurrentObject.textFrames.add();
+    pageItemDateObject = pageItemCurrentObject.textFrames.add();
     pageItemDetailLeftObject = pageItemCurrentObject.textFrames.add();
     pageItemDetailRightObject = pageItemCurrentObject.textFrames.add();
 
@@ -37,21 +35,27 @@ for (i = 0; i < bookData.pages.length; i++){
     bookDataFilePath = bookDataFile.path.replace(/~/, "Macintosh HD/Users/shota");
     root = bookDataFilePath + "/img/";
     rootPage = root + "pages/" + bookData.pages[i].pageId;
-
     pageItemImagePath = {
-        bookTitle: root + "bookTitleForPage.png",
+        bookTitleLeft: root + "bookTitleForPage_Left.png",
+        bookTitleRight: root + "bookTitleForPage_Right.png",
         image: bookAssetsPath + bookId + "-page-" + i + ".jpg",
         title: rootPage + "/title.png",
         detailLeft: rootPage + "/left.png",
         detailRight: rootPage + "/right.png"
     };
 
+    // Add page author object
     if (bookData.contributors.length != 0) {
         pageItemAuthorObject = pageItemCurrentObject.textFrames.add();
     }
 
 
-    if (i % 2 === 0){ // Even page a.k.a. page on your left hand
+    if (i % 2 === 0){ // Even pages a.k.a. page on your left hand
+
+        // Create objects
+        pageItemPageNumberLeft = pageItemCurrentObject.textFrames.add();
+        pageItemBookTitleLeftObject = pageItemCurrentObject.textFrames.add();
+
         // Set margins
         with (myDocument.pages[pageItemPositionCurrent].marginPreferences){
             columnDirection = HorizontalOrVertical.HORIZONTAL;
@@ -63,9 +67,11 @@ for (i = 0; i < bookData.pages.length; i++){
             top = "4.25mm";
         }
 
-        pageItemBookTitleObject.visibleBounds = ["1mm", "4.25mm", "6mm", "139.8mm"];
+        pageItemBookTitleLeftObject.visibleBounds = ["1mm", "12mm", "6mm", "139.75mm"];
+        pageItemPageNumberLeft.visibleBounds = ["2.75mm", "4.25mm", "7.75mm", "11.95mm"];
         pageItemImageObject.visibleBounds = ["7.5mm", "4.25mm", "142.934mm", "139.75mm"];
         pageItemTitleObject.visibleBounds = ["145.7mm", "4.25mm", "151.5mm", "70.375mm"];
+        pageItemDateObject.visibleBounds = ["153.5mm", "4.749mm", "156.5mm", "70.875mm"];
         pageItemDetailLeftObject.visibleBounds = ["158mm", "4.25mm", "205.75mm", "70.375mm"];
         pageItemDetailRightObject.visibleBounds = ["147.25mm", "73.625mm", "205.75mm", "139.75mm"];
         if (bookData.contributors.length != 0) {
@@ -73,7 +79,26 @@ for (i = 0; i < bookData.pages.length; i++){
         }
 
 
-    } else { // Odd page a.k.a. page on your right hand
+        // Set page number for Left Page
+        pageItemPageNumberLeft.contents = (i + 2).toString(); // because its starts from zero
+        pageItemPageNumberLeft.paragraphs[0].justification = Justification.leftAlign;
+        pageItemPageNumberLeft.paragraphs[0].pointSize = "10Q";
+        pageItemPageNumberLeft.paragraphs[0].appliedFont = fontGennokakuGothic;
+        pageItemPageNumberLeft.paragraphs[0].fontStyle = "Regular";
+
+        // Place page book title left
+        pageItemBookTitleLeftObject.contentType = ContentType.graphicType;
+        pageItemBookTitleLeftObject.place(pageItemImagePath.bookTitleLeft);
+        pageItemBookTitleLeftObject.fit(FitOptions.proportionally);
+
+
+
+    } else { // Odd pages a.k.a. page on your right hand
+
+        // Create objects
+        pageItemPageNumberRight = pageItemCurrentObject.textFrames.add();
+        pageItemBookTitleRightObject = pageItemCurrentObject.textFrames.add();
+
 
         // Set margins
         with (myDocument.pages[pageItemPositionCurrent].marginPreferences){
@@ -86,22 +111,47 @@ for (i = 0; i < bookData.pages.length; i++){
             top = "4.25mm";
         }
 
-        pageItemBookTitleObject.visibleBounds = ["1mm", "8.5mm", "6mm", "144.05mm"];
+        pageItemBookTitleRightObject.visibleBounds = ["1mm", "8.3mm", "6mm", "136.15mm"];
+        pageItemPageNumberRight.visibleBounds = ["2.75mm", "136.15mm", "7.75mm", "143.85mm"];
         pageItemImageObject.visibleBounds = ["7.5mm", "8.25mm", "142.934mm", "143.75mm"];
-        pageItemTitleObject.visibleBounds = ["145.1mm", "8.25mm", "150.9mm", "74.375mm"];
-        pageItemDetailLeftObject.visibleBounds = ["158mm", "8.25mm", "205.75mm", "74.375mm"];
+        pageItemTitleObject.visibleBounds = ["145.1mm", "8mm", "150.9mm", "74.125mm"];
+        pageItemDateObject.visibleBounds = ["153.5mm", "8.687mm", "156.5mm", "74.813mm"];
+        pageItemDetailLeftObject.visibleBounds = ["158mm", "8mm", "205.75mm", "74.125mm"];
         pageItemDetailRightObject.visibleBounds = ["147.25mm", "77.625mm", "205.75mm", "143.75mm"];
         if (bookData.contributors.length != 0) {
+            alert("i have some contributors");
             pageItemAuthorObject.visibleBounds = ["153.25mm", "8.25mm", "156.5mm", "74.75mm"];
         }
+
+
+        // Creat page number for right page
+        pageItemPageNumberRight.contents = (i + 2).toString();
+        pageItemPageNumberRight.paragraphs[0].justification = Justification.rightAlign;
+        pageItemPageNumberRight.paragraphs[0].pointSize = "10Q";
+        pageItemPageNumberRight.paragraphs[0].appliedFont = fontGennokakuGothic;
+        pageItemPageNumberRight.paragraphs[0].fontStyle = "Regular";
+
+        // Place page book title right
+        pageItemBookTitleRightObject.contentType = ContentType.graphicType;
+        pageItemBookTitleRightObject.place(pageItemImagePath.bookTitleRight);
+        pageItemBookTitleRightObject.fit(FitOptions.proportionally);
 
     }
 
 
+
+
+
     // Place page book title
-    pageItemBookTitleObject.contentType = ContentType.graphicType;
-    pageItemBookTitleObject.place(pageItemImagePath.bookTitle);
-    pageItemBookTitleObject.fit(FitOptions.proportionally);
+    // setColor = [0, 0, 0, 50];
+    // colorGray = pageItemDateObject.colors.add({model:ColorModel.process,space:ColorSpace.cmyk,colorValue:setColor});
+    // pageItemDateObject.characters[0].fillColor = colorGray;
+    pageItemDateObject.contents = bookData.pages[i].userDefinedDate;
+    pageItemDateObject.paragraphs[0].justification = Justification.leftAlign;
+    pageItemDateObject.paragraphs[0].pointSize = "10Q";
+    pageItemDateObject.paragraphs[0].appliedFont = fontGennokakuGothic;
+    pageItemDateObject.paragraphs[0].fontStyle = "Regular";
+
 
 
     // Place page image
@@ -112,10 +162,10 @@ for (i = 0; i < bookData.pages.length; i++){
     // Place page title
     pageItemTitleObject.contentType = ContentType.graphicType;
     pageItemTitleObject.place(pageItemImagePath.title);
-    pageItemTitleObject.fit(FitOptions.proportionally);
+    pageItemTitleObject.fit(FitOptions.FILL_PROPORTIONALLY);
 
-
-    // Place page owner name (= author)
+    // If the book is contributor book,
+    // place page owner name. (won’t show up author name if its single owner.)
     if (bookData.contributors.length != 0) {
         if (bookData.pages[i].owner){
             pageItemAuthorObject.contents = "Written by " + bookData.pages[i].owner.name;
@@ -129,21 +179,24 @@ for (i = 0; i < bookData.pages.length; i++){
         pageItemAuthorObject.paragraphs[0].pointSize = "8Q";
     }
 
-
     // Place page detail
     if (bookData.pages[i].description) {
 
-        // Left
-        pageItemDetailLeftObject.contentType = ContentType.graphicType;
-        pageItemDetailLeftObject.place(pageItemImagePath.detailLeft);
-        pageItemDetailLeftObject.fit(FitOptions.proportionally);
+        checkExistsDetailLeft = new File(pageItemImagePath.detailLeft);
+        checkExistsDetailRight = new File(pageItemImagePath.detailRight);
+        // if detail on the left exists or not
+        if (checkExistsDetailLeft.exists) {
+            pageItemDetailLeftObject.contentType = ContentType.graphicType;
+            pageItemDetailLeftObject.place(pageItemImagePath.detailLeft);
+            pageItemDetailLeftObject.fit(FitOptions.proportionally);
 
-        // Right
-        pageItemDetailRightObject.contentType = ContentType.graphicType;
-        pageItemDetailRightObject.place(pageItemImagePath.detailRight);
-        pageItemDetailRightObject.fit(FitOptions.proportionally);
-
+            // if detail on the right exists or not
+            if (checkExistsDetailRight.exists) {
+                pageItemDetailRightObject.contentType = ContentType.graphicType;
+                pageItemDetailRightObject.place(pageItemImagePath.detailRight);
+                pageItemDetailRightObject.fit(FitOptions.proportionally);
+            }
+        }
     }
-
 }
 
