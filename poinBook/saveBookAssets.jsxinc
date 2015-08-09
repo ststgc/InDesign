@@ -45,7 +45,7 @@ function saveImagesFromServer(){
     // Save page images
     for (i = 0; i < bookData.pages.length; i++) {
         pageImageUrl = bookData.pages[i].imageURL;
-        pageImageTitle = bookAssetsPath + bookId + "-page-" + i + ".jpg";
+        pageImageTitle = bookAssetsPath + bookData.pages[i].pageId + ".jpg";
         f = downloadFile(pageImageUrl, pageImageTitle);
     }
 
