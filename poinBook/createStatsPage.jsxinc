@@ -61,11 +61,32 @@ bookStatsObject.paragraphs[0].fontStyle = "Regular";
 // book colophon
 var bookColophon = pageLast.textFrames.add();
 // bookColophon.visibleBounds = ["24.497mm", "99.417mm", "31.5mm", "143.75mm"];
-bookColophon.visibleBounds = ["21.6mm", "99.417mm", "28.603mm", "143.75mm"];
+bookColophon.visibleBounds = ["21.6mm", "99.417mm", "34mm", "143.75mm"];
+var bookCreatedDate = bookData.book.createDateISO;
+var ownerCreatedDate = bookData.owner.createDateISO;
+
+bookCreatedDate.match(/(\d+)-(\d+)-(\d+)/);
+var bookCreatedDateYear = RegExp.$1;
+var bookCreatedDateMonth = RegExp.$2;
+var bookCreatedDateDate = RegExp.$3;
+var bookCreatedDateString = bookCreatedDateYear + "/" + bookCreatedDateMonth + "/" + bookCreatedDateDate;
+
+ownerCreatedDate.match(/(\d+)-(\d+)-(\d+)/);
+var ownerCreatedDateYear = RegExp.$1;
+var ownerCreatedDateMonth = RegExp.$2;
+var ownerCreatedDateDate = RegExp.$3;
+var ownerCreatedDateString = ownerCreatedDateYear + "/" + ownerCreatedDateMonth + "/" + ownerCreatedDateDate;
+
+
 bookColophon.contents =
     "Author & text: "
     + bookData.owner.name
-    + "\nPublished with: Poin Books";
+    + "\nPublished with: Poin Books"
+    + "\nBook created: "
+    + bookCreatedDateString
+    + "\nPoin user since: "
+    + ownerCreatedDateString;
+
 bookColophon.paragraphs[0].justification = Justification.leftAlign;
 bookColophon.paragraphs[0].appliedFont = fontAvenirNext;
 bookColophon.paragraphs[0].pointSize = "10Q";
