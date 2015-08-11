@@ -17,17 +17,28 @@ var checkExistsDetailLeft, checkExistsDetailRight;
 var i, root, pageItemPositionCurrent, pageItemCurrentObject;
 
 
+
+
+
+
 for (i = 0; i < bookData.pages.length; i++){
     myPages.add(); // create a new page
     pageItemPositionCurrent = 1 + i;
     pageItemCurrentObject = currentDoc.pages[pageItemPositionCurrent];
 
-    // Create each objects
-    pageItemImageObject = pageItemCurrentObject.textFrames.add();
-    pageItemTitleObject = pageItemCurrentObject.textFrames.add();
-    pageItemDateObject = pageItemCurrentObject.textFrames.add();
-    pageItemDetailLeftObject = pageItemCurrentObject.textFrames.add();
-    pageItemDetailRightObject = pageItemCurrentObject.textFrames.add();
+
+    // Set margins
+    with (myDocument.pages[pageItemPositionCurrent].marginPreferences){
+        columnDirection = HorizontalOrVertical.HORIZONTAL;
+        columnCount = 2;
+        columnGutter = "3.25mm";
+        bottom = "4.25mm";
+        left = "4.25mm";
+        right = "8.25mm";
+        top = "4.25mm";
+    }
+
+
 
     // Set path
     bookDataFilePath = bookDataFile.path.replace(/~/, "Macintosh HD/Users/shota");
@@ -42,6 +53,21 @@ for (i = 0; i < bookData.pages.length; i++){
         detailRight: rootPage + "/right.png"
     };
 
+
+    // Create each objects
+    pageItemImageObject = pageItemCurrentObject.textFrames.add();
+
+    if (flags.pageTitle === true){
+        pageItemTitleObject = pageItemCurrentObject.textFrames.add();
+        pageItemDateObject = pageItemCurrentObject.textFrames.add();
+    }
+
+    if (flags.pageDescription === true){
+        pageItemDetailLeftObject = pageItemCurrentObject.textFrames.add();
+        pageItemDetailRightObject = pageItemCurrentObject.textFrames.add();
+    }
+
+
     // Add page author object
     if (bookData.contributors.length != 0) {
         pageItemAuthorObject = pageItemCurrentObject.textFrames.add();
@@ -54,27 +80,26 @@ for (i = 0; i < bookData.pages.length; i++){
         pageItemPageNumberLeft = pageItemCurrentObject.textFrames.add();
         pageItemBookTitleLeftObject = pageItemCurrentObject.textFrames.add();
 
-        // Set margins
-        with (myDocument.pages[pageItemPositionCurrent].marginPreferences){
-            columnDirection = HorizontalOrVertical.HORIZONTAL;
-            columnCount = 2;
-            columnGutter = "3.25mm";
-            bottom = "4.25mm";
-            left = "4.25mm";
-            right = "8.25mm";
-            top = "4.25mm";
+
+
+        pageItemPageNumberLeft.visibleBounds = ["4.75mm", "4.25mm", "9.75mm", "11.95mm"];
+        pageItemBookTitleLeftObject.visibleBounds = ["3mm", "12mm", "8mm", "139.75mm"];
+        pageItemImageObject.visibleBounds = ["9.75mm", "4.25mm", "145.184mm", "139.75mm"];
+
+        if (flags.pageTitle === true){
+            pageItemTitleObject.visibleBounds = ["148.1mm", "4mm", "153.9mm", "70.125mm"];
+            pageItemDateObject.visibleBounds = ["155.5mm", "4.499mm", "158.5mm", "70.375mm"];
+
+            if (flags.pageDescription === true){
+                pageItemDetailLeftObject.visibleBounds = ["160.25mm", "4.25mm", "205.75mm", "67.25mm"];
+                pageItemDetailRightObject.visibleBounds = ["147.25mm", "73.625mm", "205.75mm", "139.75mm"];
+            }
+
+            if (bookData.contributors.length != 0) {
+                pageItemAuthorObject.visibleBounds = ["153.55mm", "19.5mm", "157mm", "70.375mm"];
+            }
         }
 
-        pageItemBookTitleLeftObject.visibleBounds = ["1mm", "12mm", "6mm", "139.75mm"];
-        pageItemPageNumberLeft.visibleBounds = ["2.75mm", "4.25mm", "7.75mm", "11.95mm"];
-        pageItemImageObject.visibleBounds = ["7.5mm", "4.25mm", "142.934mm", "139.75mm"];
-        pageItemTitleObject.visibleBounds = ["145.7mm", "4.25mm", "151.5mm", "70.375mm"];
-        pageItemDateObject.visibleBounds = ["153.5mm", "4.749mm", "156.5mm", "70.875mm"];
-        pageItemDetailLeftObject.visibleBounds = ["158mm", "4.25mm", "205.75mm", "70.375mm"];
-        pageItemDetailRightObject.visibleBounds = ["147.25mm", "73.625mm", "205.75mm", "139.75mm"];
-        if (bookData.contributors.length != 0) {
-            pageItemAuthorObject.visibleBounds = ["153.25mm", "4.25mm", "156.5mm", "70.375mm"];
-        }
 
 
         // Set page number for Left Page
@@ -98,27 +123,23 @@ for (i = 0; i < bookData.pages.length; i++){
         pageItemBookTitleRightObject = pageItemCurrentObject.textFrames.add();
 
 
-        // Set margins
-        with (myDocument.pages[pageItemPositionCurrent].marginPreferences){
-            columnDirection = HorizontalOrVertical.HORIZONTAL;
-            columnCount = 2;
-            columnGutter = "3.25mm";
-            bottom = "4.25mm";
-            left = "8.25mm";
-            right = "4.25mm";
-            top = "4.25mm";
-        }
 
-        pageItemBookTitleRightObject.visibleBounds = ["1mm", "8.3mm", "6mm", "136.15mm"];
-        pageItemPageNumberRight.visibleBounds = ["2.75mm", "136.15mm", "7.75mm", "143.85mm"];
-        pageItemImageObject.visibleBounds = ["7.5mm", "8.25mm", "142.934mm", "143.75mm"];
-        pageItemTitleObject.visibleBounds = ["145.1mm", "8mm", "150.9mm", "74.125mm"];
-        pageItemDateObject.visibleBounds = ["153.5mm", "8.687mm", "156.5mm", "74.813mm"];
-        pageItemDetailLeftObject.visibleBounds = ["158mm", "8mm", "205.75mm", "74.125mm"];
-        pageItemDetailRightObject.visibleBounds = ["147.25mm", "77.625mm", "205.75mm", "143.75mm"];
-        if (bookData.contributors.length != 0) {
-            alert("i have some contributors");
-            pageItemAuthorObject.visibleBounds = ["153.25mm", "8.25mm", "156.5mm", "74.75mm"];
+        pageItemPageNumberRight.visibleBounds = ["4.5mm", "136.15mm", "9.5mm", "143.85mm"];
+        pageItemBookTitleRightObject.visibleBounds = ["2.75mm", "8.3mm", "7.75mm", "136.15mm"];
+        pageItemImageObject.visibleBounds = ["9.5mm", "8.25mm", "144.934mm", "143.75mm"];
+
+        if (flags.pageTitle === true){
+            pageItemTitleObject.visibleBounds = ["148.1mm", "8.25mm", "153.9mm", "74.375mm"];
+            pageItemDateObject.visibleBounds = ["155.5mm", "8.687mm", "158.5mm", "74.813mm"];
+
+            if (flags.pageDescription === true){
+                pageItemDetailLeftObject.visibleBounds = ["160.25mm", "8.187mm", "205.75mm", "71.313mm"];
+                pageItemDetailRightObject.visibleBounds = ["147.25mm", "77.625mm", "205.75mm", "143.75mm"];
+
+                if (bookData.contributors.length != 0) {
+                    pageItemAuthorObject.visibleBounds = ["153.5mm", "23.3mm", "157.25mm", "74.375mm"];
+                }
+            }
         }
 
 
@@ -140,59 +161,64 @@ for (i = 0; i < bookData.pages.length; i++){
 
 
 
-    // Place page book title
-    // setColor = [0, 0, 0, 50];
-    // colorGray = pageItemDateObject.colors.add({model:ColorModel.process,space:ColorSpace.cmyk,colorValue:setColor});
-    // pageItemDateObject.characters[0].fillColor = colorGray;
-    pageItemDateObject.contents = bookData.pages[i].userDefinedDate;
-    pageItemDateObject.paragraphs[0].justification = Justification.leftAlign;
-    pageItemDateObject.paragraphs[0].pointSize = "10Q";
-    pageItemDateObject.paragraphs[0].appliedFont = fontGennokakuGothic;
-    pageItemDateObject.paragraphs[0].fontStyle = "Regular";
-
-
-
     // Place page image
     pageItemImageObject.contentType = ContentType.graphicType;
     pageItemImageObject.place(pageItemImagePath.image);
     pageItemImageObject.fit(FitOptions.proportionally);
 
-    // Place page title
-    pageItemTitleObject.contentType = ContentType.graphicType;
-    pageItemTitleObject.place(pageItemImagePath.title);
-    pageItemTitleObject.fit(FitOptions.FILL_PROPORTIONALLY);
 
-    // If the book is contributor book,
-    // place page owner name. (won’t show up author name if its single owner.)
-    if (bookData.contributors.length != 0) {
-        if (bookData.pages[i].owner){
-            pageItemAuthorObject.contents = "Written by " + bookData.pages[i].owner.name;
-        } else {
-            pageItemAuthorObject.contents = "Written by " + bookData.owner.name;
+    if (flags.pageTitle === true){
+
+        // Place page title
+        pageItemTitleObject.contentType = ContentType.graphicType;
+        pageItemTitleObject.place(pageItemImagePath.title);
+        pageItemTitleObject.fit(FitOptions.FILL_PROPORTIONALLY);
+
+        // Place page date
+        // setColor = [0, 0, 0, 50];
+        // colorGray = pageItemDateObject.colors.add({model:ColorModel.process,space:ColorSpace.cmyk,colorValue:setColor});
+        // pageItemDateObject.characters[0].fillColor = colorGray;
+        pageItemDateObject.contents = bookData.pages[i].userDefinedDate;
+        pageItemDateObject.paragraphs[0].justification = Justification.leftAlign;
+        pageItemDateObject.paragraphs[0].pointSize = "10Q";
+        pageItemDateObject.paragraphs[0].appliedFont = fontGennokakuGothic;
+        pageItemDateObject.paragraphs[0].fontStyle = "Regular";
+
+        // If the book is contributor book,
+        // place page owner name. (won’t show up author name if its single owner.)
+        if (bookData.contributors.length != 0) {
+            if (bookData.pages[i].owner){
+                pageItemAuthorObject.contents = "Written by " + bookData.pages[i].owner.name;
+            } else {
+                pageItemAuthorObject.contents = "Written by " + bookData.owner.name;
+            }
+            pageItemAuthorObject.paragraphs[0].justification = Justification.leftAlign;
+            pageItemAuthorObject.paragraphs[0].appliedFont = fontGennokakuGothic;
+            pageItemAuthorObject.paragraphs[0].leading = "3.25mm";
+            pageItemAuthorObject.paragraphs[0].fontStyle = "Regular";
+            pageItemAuthorObject.paragraphs[0].pointSize = "10Q";
         }
-        pageItemAuthorObject.paragraphs[0].justification = Justification.leftAlign;
-        pageItemAuthorObject.paragraphs[0].appliedFont = fontGennokakuGothic;
-        pageItemAuthorObject.paragraphs[0].leading = "3.25mm";
-        pageItemAuthorObject.paragraphs[0].fontStyle = "Regular";
-        pageItemAuthorObject.paragraphs[0].pointSize = "8Q";
-    }
 
-    // Place page detail
-    if (bookData.pages[i].description) {
+        if (flags.pageDescription === true){
 
-        checkExistsDetailLeft = new File(pageItemImagePath.detailLeft);
-        checkExistsDetailRight = new File(pageItemImagePath.detailRight);
-        // if detail on the left exists or not
-        if (checkExistsDetailLeft.exists) {
-            pageItemDetailLeftObject.contentType = ContentType.graphicType;
-            pageItemDetailLeftObject.place(pageItemImagePath.detailLeft);
-            pageItemDetailLeftObject.fit(FitOptions.proportionally);
+            // Place page detail
+            if (bookData.pages[i].description) {
 
-            // if detail on the right exists or not
-            if (checkExistsDetailRight.exists) {
-                pageItemDetailRightObject.contentType = ContentType.graphicType;
-                pageItemDetailRightObject.place(pageItemImagePath.detailRight);
-                pageItemDetailRightObject.fit(FitOptions.proportionally);
+                checkExistsDetailLeft = new File(pageItemImagePath.detailLeft);
+                checkExistsDetailRight = new File(pageItemImagePath.detailRight);
+                // if detail on the left exists or not
+                if (checkExistsDetailLeft.exists) {
+                    pageItemDetailLeftObject.contentType = ContentType.graphicType;
+                    pageItemDetailLeftObject.place(pageItemImagePath.detailLeft);
+                    pageItemDetailLeftObject.fit(FitOptions.proportionally);
+
+                    // if detail on the right exists or not
+                    if (checkExistsDetailRight.exists) {
+                        pageItemDetailRightObject.contentType = ContentType.graphicType;
+                        pageItemDetailRightObject.place(pageItemImagePath.detailRight);
+                        pageItemDetailRightObject.fit(FitOptions.proportionally);
+                    }
+                }
             }
         }
     }
