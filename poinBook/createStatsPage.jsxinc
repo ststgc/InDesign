@@ -2,7 +2,7 @@
 // ----------------------------------------------
 
 // Create new page
-myPages.add(); // create a new page
+myPages.add();
 var pageLastPosition = 1 + bookData.pages.length;
 with (myDocument.pages[pageLastPosition].marginPreferences){
     bottom = "4.25mm";
@@ -42,26 +42,33 @@ bookLastTitleObject.paragraphs[0].fontStyle = "Medium";
 
 
 // book stats
-var bookStatsObject = pageLast.textFrames.add();
-bookStatsObject.visibleBounds = ["11.49mm", "99.417mm", "21.29mm", "143.75mm"];
-bookStatsObject.contents =
-    // bookData.stats.page
-    // + " Pages\n"
-    bookData.stats.reaction
-    + " Reactions\n"
-    + bookData.stats.follower
-    + " Followers";
-bookStatsObject.paragraphs[0].justification = Justification.leftAlign;
-bookStatsObject.paragraphs[0].appliedFont = fontAvenirNext;
-bookStatsObject.paragraphs[0].pointSize = "10Q";
-bookStatsObject.paragraphs[0].leading = "3.25mm";
-bookStatsObject.paragraphs[0].fontStyle = "Regular";
-
-
-// book colophon
+var statsHappyLine = 9;
 var bookColophon = pageLast.textFrames.add();
-// bookColophon.visibleBounds = ["24.497mm", "99.417mm", "31.5mm", "143.75mm"];
-bookColophon.visibleBounds = ["21.6mm", "99.417mm", "34mm", "143.75mm"];
+
+if (bookData.stats.follower > statsHappyLine || bookData.stats.reaction > statsHappyLine){
+    var bookStatsObject = pageLast.textFrames.add();
+    bookStatsObject.visibleBounds = ["11.49mm", "99.417mm", "21.29mm", "143.75mm"];
+    bookStatsObject.contents =
+        bookData.stats.reaction
+        + " Reactions\n"
+        + bookData.stats.follower
+        + " Followers";
+    bookStatsObject.paragraphs[0].justification = Justification.leftAlign;
+    bookStatsObject.paragraphs[0].appliedFont = fontAvenirNext;
+    bookStatsObject.paragraphs[0].pointSize = "10Q";
+    bookStatsObject.paragraphs[0].leading = "3.25mm";
+    bookStatsObject.paragraphs[0].fontStyle = "Regular";
+
+    // book colophon
+    bookColophon.visibleBounds = ["21.6mm", "99.417mm", "34mm", "143.75mm"];
+
+} else {
+    // book colophon
+    bookColophon.visibleBounds = ["11.99mm", "99.417mm", "25.5mm", "143.75mm"];
+}
+
+
+// Book colophone
 var bookCreatedDate = bookData.book.createDateISO;
 var ownerCreatedDate = bookData.owner.createDateISO;
 
@@ -94,10 +101,11 @@ bookColophon.paragraphs[0].fontStyle = "Regular";
 bookColophon.paragraphs[0].leading = "3.25mm";
 
 
+
 // Place QR Code
 var bookQRImage = bookAssetsPath + bookId + "-bookQR.jpg";
 var bookQRImageObject = pageLast.textFrames.add();
-bookQRImageObject.visibleBounds = ["192.75mm", "130.823mm", "205.75mm", "143.75mm"];
+bookQRImageObject.visibleBounds = ["193.25mm", "99.536mm", "206.25mm", "112.463mm"];
 bookQRImageObject.contentType = ContentType.graphicType;
 bookQRImageObject.place(bookQRImage);
 bookQRImageObject.fit(FitOptions.proportionally);
@@ -107,7 +115,7 @@ bookQRImageObject.fit(FitOptions.proportionally);
 // TODO: Need to decode utf-8
 var bookQRMessage = "Read this QR code to open the book on Poin";
 var bookQRMessageObject = pageLast.textFrames.add();
-bookQRMessageObject.visibleBounds = ["200.625mm", "99.417mm", "206.375mm", "130mm"];
+bookQRMessageObject.visibleBounds = ["197.5mm", "114mm", "206mm", "132mm"];
 bookQRMessageObject.contents = bookQRMessage;
 bookQRMessageObject.paragraphs[0].justification = Justification.leftAlign;
 bookQRMessageObject.paragraphs[0].pointSize = "8Q";
