@@ -17,10 +17,7 @@ var checkExistsDetailLeft, checkExistsDetailRight;
 var i, root, pageItemPositionCurrent, pageItemCurrentObject;
 
 
-
-
-
-
+// Create pages
 for (i = 0; i < bookData.pages.length; i++){
     myPages.add(); // create a new page
     pageItemPositionCurrent = 1 + i;
@@ -96,7 +93,7 @@ for (i = 0; i < bookData.pages.length; i++){
             }
 
             if (bookData.contributors.length != 0) {
-                pageItemAuthorObject.visibleBounds = ["153.55mm", "19.5mm", "157mm", "70.375mm"];
+                pageItemAuthorObject.visibleBounds = ["155.55mm", "19.5mm", "159mm", "70.375mm"];
             }
         }
 
@@ -137,7 +134,7 @@ for (i = 0; i < bookData.pages.length; i++){
                 pageItemDetailRightObject.visibleBounds = ["147.25mm", "77.625mm", "205.75mm", "143.75mm"];
 
                 if (bookData.contributors.length != 0) {
-                    pageItemAuthorObject.visibleBounds = ["153.5mm", "23.3mm", "157.25mm", "74.375mm"];
+                    pageItemAuthorObject.visibleBounds = ["155.5mm", "23.3mm", "159.25mm", "74.375mm"];
                 }
             }
         }
@@ -223,4 +220,8 @@ for (i = 0; i < bookData.pages.length; i++){
         }
     }
 }
+
+
+
+
 
