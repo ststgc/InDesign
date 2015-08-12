@@ -45,5 +45,3 @@ for (i = 0; i < bookCoverTextBoxes.length ; i++){
     bookCoverTextObject.fit(FitOptions.proportionally);
 }
 
-
-
