@@ -2,13 +2,22 @@
 
 // # Export as PDF
 // -----------------------------------------------
+var pdfPreset = "[高品質印刷]"
 var bookTitle = bookData.book.title.replace(/\s+/g, '');
-var pdfFileName = bookTitle + ".pdf";
 var pdfSavePath = Folder.selectDialog(
     "PDF保存場所を選択してください\n"
     + "作成したInDesignデータから、入稿用PDFを作成します。保存したいフォルダを選択してください。"
 );
-currentDoc.exportFile(ExportFormat.PDF_TYPE, File(pdfFileName), true, undefined, undefined);
+var pdfPagesFileName = "/Pages_" + bookTitle + ".pdf";
+var pdfBookCoverFileName = "/BookCover_" +  bookTitle + ".pdf";
+
+for (var i = 0; i < app.documents.length; i++){
+    if (i === 0){
+        app.documents[i].exportFile(ExportFormat.pdfType, File(pdfSavePath + pdfBookCoverFileName), false);
+    } else {
+        app.documents[i].exportFile(ExportFormat.pdfType, File(pdfSavePath + pdfPagesFileName), false);
+    }
+}
 
 
 // # Close the file at the end of the process
