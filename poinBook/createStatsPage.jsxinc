@@ -95,7 +95,7 @@ bookColophon.contents =
     + ownerCreatedDateString;
 
 bookColophon.paragraphs[0].justification = Justification.leftAlign;
-bookColophon.paragraphs[0].appliedFont = fontAvenirNext;
+bookColophon.paragraphs[0].appliedFont = fontGennokakuGothic;
 bookColophon.paragraphs[0].pointSize = "10Q";
 bookColophon.paragraphs[0].fontStyle = "Regular";
 bookColophon.paragraphs[0].leading = "3.25mm";
