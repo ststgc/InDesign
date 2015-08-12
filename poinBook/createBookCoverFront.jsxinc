@@ -4,86 +4,144 @@
 // ------------------------------
 
 
-// Set margin and gutter
-// *You need to set margin and gutter per pages.
-with (myDocument.pages.item(0).marginPreferences){
-    columnCount = 2;
-    columnGutter = "3.25mm";
-    bottom = "4.25mm";
-    left = "4.25mm";
-    right = "4.25mm";
-    top = "4.25mm";
+// Create new document for bookcover
+var myDocumentCover = app.documents.add();
+var myPages = app.activeDocument.pages;
+var currentDocObject = myPages.item(0);
+
+// Set the size of the book
+var paperThickness = 0.1; // Matte no.001
+var bookSpineWidth = paperThickness * Math.ceil((bookData.pages.length + 2) / 2) + 0.5; // 1 page = 0.1 mm
+var bookCoverSinglePageWidth = 148;
+var bookCoverWidth = bookSpineWidth + bookCoverSinglePageWidth*2
+with (myDocumentCover.documentPreferences){ // Create A5 document
+    pageHeight = "210mm";
+    pageWidth = bookCoverWidth + "mm";
+    pageOrientation = PageOrientation.landscape;
+    facingPages = false;
 }
 
 
 
-var bookCoverImageObject = currentDoc.textFrames.add();
-bookCoverImageObject.visibleBounds = ["4.25mm", "4.25mm", "205.75mm", "143.75mm"];
+// Title
+var bookCoverTextObject = currentDocObject.textFrames.add();
+var bookCoverTitleY1 = 22.864;
+var bookCoverTitleX1 = bookCoverSinglePageWidth + bookSpineWidth + 29.597;
+var bookCoverTitleY2 = 31.087;
+var bookCoverTitleX2 = bookCoverSinglePageWidth + bookSpineWidth + 118.402;
+var bookCoverTitle = bookData.book.title;
+bookCoverTextObject.visibleBounds = [bookCoverTitleY1, bookCoverTitleX1, bookCoverTitleY2, bookCoverTitleX2];
+bookCoverTextObject.contents = bookCoverTitle;
+bookCoverTextObject.paragraphs[0].justification = Justification.leftAlign;
+bookCoverTextObject.paragraphs[0].pointSize = "30Q";
+bookCoverTextObject.paragraphs[0].appliedFont = fontGennokakuGothic;
+bookCoverTextObject.paragraphs[0].fontStyle = "Medium";
+
+
+// Author
+var bookCoverAuthorObject = currentDocObject.textFrames.add();
+var bookCoverAuthorY1 = 33.622;
+var bookCoverAuthorX1 = bookCoverSinglePageWidth + bookSpineWidth + 29.597;
+var bookCoverAuthorY2 = 39.089;
+var bookCoverAuthorX2 = bookCoverSinglePageWidth + bookSpineWidth + 118.402;
+var bookCoverAuthor = "by " + bookData.owner.name;
+bookCoverAuthorObject.visibleBounds = [bookCoverAuthorY1, bookCoverAuthorX1, bookCoverAuthorY2, bookCoverAuthorX2];
+bookCoverAuthorObject.contents = bookCoverAuthor;
+bookCoverAuthorObject.paragraphs[0].justification = Justification.leftAlign;
+bookCoverAuthorObject.paragraphs[0].pointSize = "16Q";
+bookCoverAuthorObject.paragraphs[0].appliedFont = fontGennokakuGothic;
+bookCoverAuthorObject.paragraphs[0].fontStyle = "Regular";
+
+// Bookcover image
+var bookCoverImageObject = currentDocObject.textFrames.add();
+var bookCoverImageY1 = 54.798;
+var bookCoverImageX1 = bookCoverSinglePageWidth + bookSpineWidth + 29.597;
+var bookCoverImageY2 = 180.401;
+var bookCoverImageX2 = bookCoverSinglePageWidth + bookSpineWidth + 118.402;
+bookCoverImageObject.visibleBounds = [bookCoverImageY1, bookCoverImageX1, bookCoverImageY2, bookCoverImageX2];
 bookCoverImageObject.contentType = ContentType.graphicType;
 bookCoverImageObject.place(bookCoverImage);
 bookCoverImageObject.fit(FitOptions.proportionally);
 
 
-// Draw book title holder
-bookCoverTitleHolderBoxes = [
-    [92, 33.073, 117.982, 114.928], // outer white box
-    [92.865, 33.866, 117.169, 114.18], // inner stroke
-    [93.236, 34.292, 116.763, 113.709] // second inner stroke
-]
-
-var i, y1, x1, y2, x2, setColor, colorWhite;
-for (i = 0; i < bookCoverTitleHolderBoxes.length; i++){
-    y1 = bookCoverTitleHolderBoxes[i][0];
-    x1 = bookCoverTitleHolderBoxes[i][1];
-    y2 = bookCoverTitleHolderBoxes[i][2];
-    x2 = bookCoverTitleHolderBoxes[i][3];
-    bookCoverTitleHolder = currentDoc.rectangles.add();
-    bookCoverTitleHolder.geometricBounds = [y1, x1, y2, x2];
-    if (i == 0){ // outer white box
-        setColor = [0, 0, 0, 0];
-        colorWhite = currentDoc.colors.add({
-            model: ColorModel.process,
-            space: ColorSpace.cmyk,
-            colorValue: setColor
-        });
-        bookCoverTitleHolder.fillColor = colorWhite;
-        bookCoverTitleHolder.strokeWeight = "0";
-    } else { // inner stroke
-        bookCoverTitleHolder.strokeWeight = "0.1mm";
-    }
-}
+// Poin Logo
+var poinLogoObject = currentDocObject.textFrames.add();
+var poinLogoY1 = 191.983;
+var poinLogoX1 = 10;
+var poinLogoY2 = 200;
+// var poinLogoX2 = 19.813;
+var poinLogoX2 = 20;
+var poinLogoPath = "Macintosh HD/Users/shota/Dropbox/002_share/001_m\&c/001_Project/poin/photobook_order/assets/logo.png"
+poinLogoObject.visibleBounds = [poinLogoY1, poinLogoX1, poinLogoY2, poinLogoX2];
+poinLogoObject.contentType = ContentType.graphicType;
+poinLogoObject.place(poinLogoPath);
+poinLogoObject.fit(FitOptions.proportionally);
 
 
-// Place book title
-var currentDoc = app.activeDocument;
-var bookCoverTextBoxes = [
-    [101.001, 34.356, 107.5, 113.643, bookData.book.title], // book title [y1, x1, y2, x2]
-    [106.126, 34.356, 109.376, 113.643, "by " + bookData.owner.name] // author title
-];
+// Poin Title
+var poinTitleObject = currentDocObject.textFrames.add();
+var poinTitleY1 = 191.728;
+var poinTitleX1 = 22.923;
+var poinTitleY2 = 196.741;
+var poinTitleX2 = 68.723;
+poinTitleObject.visibleBounds = [poinTitleY1, poinTitleX1, poinTitleY2, poinTitleX2];
+poinTitleObject.contents = "Poin";
+poinTitleObject.paragraphs[0].justification = Justification.leftAlign;
+poinTitleObject.paragraphs[0].pointSize = "20Q";
+poinTitleObject.paragraphs[0].appliedFont = fontBitter;
+poinTitleObject.paragraphs[0].fontStyle = "Bold";
 
-var i, y1, x1, y2, x2, bookCoverTextObject;
-for (i = 0; i < bookCoverTextBoxes.length ; i++){
-    y1 = bookCoverTextBoxes[i][0] + "mm";
-    x1 = bookCoverTextBoxes[i][1] + "mm";
-    y2 = bookCoverTextBoxes[i][2] + "mm";
-    x2 = bookCoverTextBoxes[i][3] + "mm";
-    bookCoverTextObject = currentDoc.textFrames.add();
-    bookCoverTextObject.visibleBounds = [x1, y1, x2, y2];
-    bookCoverTextObject.contents = bookCoverTextBoxes[i][4];
-    bookCoverTextObject.paragraphs[0].justification = Justification.centerAlign;
 
-    // adjust font size for book title
-    if (i == 0){
-        bookCoverTextObject.paragraphs[0].pointSize = "16Q";
-        bookCoverTextObject.paragraphs[0].appliedFont = fontGennokakuGothic;
-        bookCoverTextObject.paragraphs[0].fontStyle = "Bold";
-        bookCoverTextObject.paragraphs[0].tracking = 300;
-    } else {  // adjust font size for author name
-        bookCoverTextObject.paragraphs[0].pointSize = "13Q";
-        bookCoverTextObject.paragraphs[0].appliedFont = fontGennokakuGothic;
-        bookCoverTextObject.paragraphs[0].fontStyle = "Regular";
-    }
-}
+// Poin Tagline
+var poinTaglineObject = currentDocObject.textFrames.add();
+var poinTaglineY1 = 197.249;
+var poinTaglineX1 = 22.923;
+var poinTaglineY2 = 202.262;
+var poinTaglineX2 = 68.723;
+poinTaglineObject.visibleBounds = [poinTaglineY1, poinTaglineX1, poinTaglineY2, poinTaglineX2];
+poinTaglineObject.contents = "Life's Full Of Interesting";
+poinTaglineObject.paragraphs[0].justification = Justification.leftAlign;
+poinTaglineObject.paragraphs[0].pointSize = "12Q";
+poinTaglineObject.paragraphs[0].appliedFont = fontAvenirNext;
+poinTaglineObject.paragraphs[0].fontStyle = "Regular";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
