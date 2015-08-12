@@ -54,17 +54,17 @@ if (bookData.stats.follower > statsHappyLine || bookData.stats.reaction > statsH
         + bookData.stats.follower
         + " Followers";
     bookStatsObject.paragraphs[0].justification = Justification.leftAlign;
-    bookStatsObject.paragraphs[0].appliedFont = fontAvenirNext;
+    bookStatsObject.paragraphs[0].appliedFont = fontGennokakuGothic;
     bookStatsObject.paragraphs[0].pointSize = "10Q";
     bookStatsObject.paragraphs[0].leading = "3.25mm";
     bookStatsObject.paragraphs[0].fontStyle = "Regular";
 
     // book colophon
-    bookColophon.visibleBounds = ["21.6mm", "99.417mm", "34mm", "143.75mm"];
+    bookColophon.visibleBounds = ["21.6mm", "99.417mm", "53mm", "143.75mm"];
 
 } else {
     // book colophon
-    bookColophon.visibleBounds = ["11.99mm", "99.417mm", "25.5mm", "143.75mm"];
+    bookColophon.visibleBounds = ["11.99mm", "99.417mm", "53mm", "143.75mm"];
 }
 
 
