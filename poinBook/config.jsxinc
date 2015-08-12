@@ -5,6 +5,7 @@
 var currentDoc = app.activeDocument;
 var fontAvenirNext = app.fonts.item("Avenir Next");
 var fontGennokakuGothic = app.fonts.item("源ノ角ゴシック");
+var fontBitter = app.fonts.item("Bitter");
 var bookId = bookData.book.bookId;
 var bookAssets = new Folder('~/Downloads/poinBookAssets/');
 if (!bookAssets.exists) bookAssets.create();
