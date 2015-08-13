@@ -2,14 +2,10 @@
 
 
 var flags = {
-    pageTitle: prompt("ページにタイトルを付けますか？\n\nページタイトルあり: 1\nページタイトルなし: 0", "1")
+    pageTitle: prompt("ページにタイトルを付けますか？\n\nページタイトルあり: 1\nページタイトルなし: 0", "1"),
+    pageDescription: prompt("ページに本文を付けますか？\n\n本文あり: 1\n本文なし: 0", "1")
 }
 
-if (flags.pageTitle === "1"){
-    var flags = {
-        pageDescription: prompt("ページに本文を付けますか？\n\n本文あり: 1\n本文なし: 0", "1")
-    }
-}
 
 flagsBooleanize();
 
@@ -23,3 +19,4 @@ function flagsBooleanize(){
         }
     }
 }
+

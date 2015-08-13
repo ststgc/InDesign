@@ -71,7 +71,7 @@ var poinLogoX1 = 10;
 var poinLogoY2 = 200;
 // var poinLogoX2 = 19.813;
 var poinLogoX2 = 20;
-var poinLogoPath = "Macintosh HD/Users/shota/Dropbox/002_share/001_m\&c/001_Project/poin/photobook_order/assets/logo.png"
+var poinLogoPath = "Macintosh HD/Users/shota/Dropbox/002_share/001_m\&c/001_Project/poin/photobook_order/000_assets/logo.png"
 poinLogoObject.visibleBounds = [poinLogoY1, poinLogoX1, poinLogoY2, poinLogoX2];
 poinLogoObject.contentType = ContentType.graphicType;
 poinLogoObject.place(poinLogoPath);

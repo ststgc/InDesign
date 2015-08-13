@@ -4,10 +4,11 @@
 // -----------------------------------------------
 var pdfPreset = "[高品質印刷]"
 var bookTitle = bookData.book.title.replace(/\s+/g, '');
-var pdfSavePath = Folder.selectDialog(
-    "PDF保存場所を選択してください\n"
-    + "作成したInDesignデータから、入稿用PDFを作成します。保存したいフォルダを選択してください。"
-);
+// var pdfSavePath = Folder.selectDialog(
+//     "PDF保存場所を選択してください\n"
+//     + "作成したInDesignデータから、入稿用PDFを作成します。保存したいフォルダを選択してください。"
+// );
+var pdfSavePath = bookDataFilePath;
 var pdfPagesFileName = "/Pages_" + bookTitle + ".pdf";
 var pdfBookCoverFileName = "/BookCover_" +  bookTitle + ".pdf";
 
@@ -41,7 +42,11 @@ alert(
 
 
 
-// # Close without saving
+// # Close active documents with saving nothing
 // -----------------------------------------------
-// currentDoc.exit(saveOptions.no);
+
+// for (var i = 0; i < app.documents.length; i++){
+//   app.documents[i].select.exit(saveOptions.no);
+// }
+
 

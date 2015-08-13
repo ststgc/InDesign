@@ -24,19 +24,6 @@ for (i = 0; i < bookData.pages.length; i++){
     pageItemCurrentObject = currentDoc.pages[pageItemPositionCurrent];
 
 
-    // Set margins
-    with (myDocument.pages[pageItemPositionCurrent].marginPreferences){
-        columnDirection = HorizontalOrVertical.HORIZONTAL;
-        columnCount = 2;
-        columnGutter = "3.25mm";
-        bottom = "4.25mm";
-        left = "4.25mm";
-        right = "8.25mm";
-        top = "4.25mm";
-    }
-
-
-
     // Set path
     bookDataFilePath = bookDataFile.path.replace(/~/, "Macintosh HD/Users/shota");
     root = bookDataFilePath + "/img/";
@@ -73,6 +60,18 @@ for (i = 0; i < bookData.pages.length; i++){
 
     if (i % 2 === 0){ // Even pages a.k.a. page on your left hand
 
+
+        // Set margins
+        with (myDocument.pages[pageItemPositionCurrent].marginPreferences){
+            columnDirection = HorizontalOrVertical.HORIZONTAL;
+            columnCount = 2;
+            columnGutter = "3.25mm";
+            bottom = "4.25mm";
+            left = "4.25mm";
+            right = "8.25mm";
+            top = "4.25mm";
+        }
+
         // Create objects
         pageItemPageNumberLeft = pageItemCurrentObject.textFrames.add();
         pageItemBookTitleLeftObject = pageItemCurrentObject.textFrames.add();
@@ -84,11 +83,11 @@ for (i = 0; i < bookData.pages.length; i++){
         pageItemImageObject.visibleBounds = ["9.75mm", "4.25mm", "145.184mm", "139.75mm"];
 
         if (flags.pageTitle === true){
-            pageItemTitleObject.visibleBounds = ["148.1mm", "4mm", "153.9mm", "70.125mm"];
+            pageItemTitleObject.visibleBounds = ["147.35mm", "4mm", "154.75mm", "70.125mm"];
             pageItemDateObject.visibleBounds = ["155.5mm", "4.499mm", "158.5mm", "70.375mm"];
 
             if (flags.pageDescription === true){
-                pageItemDetailLeftObject.visibleBounds = ["160.25mm", "4.25mm", "205.75mm", "67.25mm"];
+                pageItemDetailLeftObject.visibleBounds = ["159.75mm", "3.75mm", "205.25mm", "69.875mm"];
                 pageItemDetailRightObject.visibleBounds = ["147.25mm", "73.625mm", "205.75mm", "139.75mm"];
             }
 
@@ -115,6 +114,18 @@ for (i = 0; i < bookData.pages.length; i++){
 
     } else { // Odd pages a.k.a. page on your right hand
 
+
+        // Set margins
+        with (myDocument.pages[pageItemPositionCurrent].marginPreferences){
+            columnDirection = HorizontalOrVertical.HORIZONTAL;
+            columnCount = 2;
+            columnGutter = "3.25mm";
+            bottom = "4.25mm";
+            left = "8.25mm";
+            right = "4.25mm";
+            top = "4.25mm";
+        }
+
         // Create objects
         pageItemPageNumberRight = pageItemCurrentObject.textFrames.add();
         pageItemBookTitleRightObject = pageItemCurrentObject.textFrames.add();
@@ -126,11 +137,11 @@ for (i = 0; i < bookData.pages.length; i++){
         pageItemImageObject.visibleBounds = ["9.5mm", "8.25mm", "144.934mm", "143.75mm"];
 
         if (flags.pageTitle === true){
-            pageItemTitleObject.visibleBounds = ["148.1mm", "8.25mm", "153.9mm", "74.375mm"];
+            pageItemTitleObject.visibleBounds = ["147.35mm", "8.25mm", "154.75mm", "74.375mm"];
             pageItemDateObject.visibleBounds = ["155.5mm", "8.687mm", "158.5mm", "74.813mm"];
 
             if (flags.pageDescription === true){
-                pageItemDetailLeftObject.visibleBounds = ["160.25mm", "8.187mm", "205.75mm", "71.313mm"];
+                pageItemDetailLeftObject.visibleBounds = ["159.75mm", "7.938mm", "205.25mm", "74.063mm"];
                 pageItemDetailRightObject.visibleBounds = ["147.25mm", "77.625mm", "205.75mm", "143.75mm"];
 
                 if (bookData.contributors.length != 0) {
@@ -169,7 +180,7 @@ for (i = 0; i < bookData.pages.length; i++){
         // Place page title
         pageItemTitleObject.contentType = ContentType.graphicType;
         pageItemTitleObject.place(pageItemImagePath.title);
-        pageItemTitleObject.fit(FitOptions.FILL_PROPORTIONALLY);
+        pageItemTitleObject.fit(FitOptions.proportionally);
 
         // Place page date
         // setColor = [0, 0, 0, 50];
