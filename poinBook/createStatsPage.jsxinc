@@ -17,16 +17,16 @@ with (myDocument.pages[pageLastPosition].marginPreferences){
 var pageLast = currentDoc.pages[pageLastPosition]
 
 // Draw gray line
-var pageLastLine = pageLast.rectangles.add();
-pageLastLine.geometricBounds = ["4.25mm", "96.167mm", "205.75mm", "96.267mm"];
-var setColor = [0, 0, 0, 10];
+var pageLastVerticalLine = pageLast.rectangles.add();
+pageLastVerticalLine.geometricBounds = ["4.25mm", "96.167mm", "205.75mm", "96.267mm"];
+var setColor = [0, 0, 0, 15];
 var colorWhite = currentDoc.colors.add({
     model: ColorModel.process,
     space: ColorSpace.cmyk,
     colorValue: setColor
 });
-pageLastLine.fillColor = colorWhite;
-pageLastLine.strokeWeight = "0";
+pageLastVerticalLine.fillColor = colorWhite;
+pageLastVerticalLine.strokeWeight = "0";
 
 
 
