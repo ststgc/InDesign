@@ -28,36 +28,22 @@ var bookDataFilePath = bookDataFile.path.replace(/~/, "Macintosh HD/Users/shota"
 // Title
 var bookCoverTitleObject = currentDocObject.textFrames.add();
 var bookCoverTitlePath = bookDataFilePath + "/img/bookCoverTitle.png";
-var bookCoverTitleY1 = 22.864;
+var bookCoverTitleY1 = 20.368;
 var bookCoverTitleX1 = bookCoverSinglePageWidth + bookSpineWidth + 29.6;
 var bookCoverTitleY2 = 30.881;
-var bookCoverTitleX2 = bookCoverSinglePageWidth + bookSpineWidth + 141.6;
+var bookCoverTitleX2 = bookCoverSinglePageWidth + bookSpineWidth + 118.405;
 bookCoverTitleObject.visibleBounds = [bookCoverTitleY1, bookCoverTitleX1, bookCoverTitleY2, bookCoverTitleX2];
 bookCoverTitleObject.contentType = ContentType.graphicType;
 bookCoverTitleObject.place(bookCoverTitlePath);
 bookCoverTitleObject.fit(FitOptions.proportionally);
 
 // Author
-var bookCoverAuthorByObject = currentDocObject.textFrames.add();
-var bookCoverAuthorBy = "by";
-var bookCoverAuthorByY1 = 33.622;
-var bookCoverAuthorByX1 = bookCoverSinglePageWidth + bookSpineWidth + 29.597;
-var bookCoverAuthorByY2 = 39.089;
-var bookCoverAuthorByX2 = bookCoverSinglePageWidth + bookSpineWidth + 36.6;
-bookCoverAuthorByObject.visibleBounds = [bookCoverAuthorByY1, bookCoverAuthorByX1, bookCoverAuthorByY2, bookCoverAuthorByX2];
-bookCoverAuthorByObject.contents = bookCoverAuthorBy;
-bookCoverAuthorByObject.paragraphs[0].justification = Justification.leftAlign;
-bookCoverAuthorByObject.paragraphs[0].pointSize = "16Q";
-bookCoverAuthorByObject.paragraphs[0].appliedFont = fontGennokakuGothic;
-bookCoverAuthorByObject.paragraphs[0].fontStyle = "Regular";
-
-
 var bookCoverAuthorNameObject = currentDocObject.textFrames.add();
 var bookCoverAuthorNamePath = bookDataFilePath + "/img/bookCoverAuthorName.png";
-var bookCoverAuthorNameY1 = 33.622;
-var bookCoverAuthorNameX1 = bookCoverSinglePageWidth + bookSpineWidth + 36.6;
-var bookCoverAuthorNameY2 = 39.089;
-var bookCoverAuthorNameX2 = bookCoverSinglePageWidth + bookSpineWidth + 141.6;
+var bookCoverAuthorNameY1 = 31.239;
+var bookCoverAuthorNameX1 = bookCoverSinglePageWidth + bookSpineWidth + 29.35;
+var bookCoverAuthorNameY2 = 38.339;
+var bookCoverAuthorNameX2 = bookCoverSinglePageWidth + bookSpineWidth + 134.35;
 bookCoverAuthorNameObject.visibleBounds = [bookCoverAuthorNameY1, bookCoverAuthorNameX1, bookCoverAuthorNameY2, bookCoverAuthorNameX2];
 bookCoverAuthorNameObject.contentType = ContentType.graphicType;
 bookCoverAuthorNameObject.place(bookCoverAuthorNamePath);
