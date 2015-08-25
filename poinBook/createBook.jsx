@@ -1,7 +1,5 @@
 
 // Main
-
-
 #include "./loadBookData.jsxinc"
 #include "./documentSettings.jsxinc"
 #include "./config.jsxinc"
@@ -12,9 +10,6 @@
 #include "./createStatsPage.jsxinc"
 #include "./createBookCover.jsxinc"
 #include "./exportAsPDF.jsxinc"
-
-
-
 
 
 

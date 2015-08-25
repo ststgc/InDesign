@@ -32,13 +32,11 @@ pageLastVerticalLine.strokeWeight = "0";
 
 // book title
 var bookLastTitleObject = pageLast.textFrames.add();
-bookLastTitleObject.visibleBounds = ["5.009mm", "99.417mm", "9.4 mm", "143.75mm"];
-bookLastTitleObject.contents = bookData.book.title;
-bookLastTitleObject.paragraphs[0].justification = Justification.leftAlign;
-bookLastTitleObject.paragraphs[0].appliedFont = fontGennokakuGothic;
-bookLastTitleObject.paragraphs[0].pointSize = "10Q";
-bookLastTitleObject.paragraphs[0].leading = "3.25mm";
-bookLastTitleObject.paragraphs[0].fontStyle = "Medium";
+var bookLastTitle = bookDataFilePath + "/img/statsPageBookTitle.png";
+bookLastTitleObject.visibleBounds = ["3.937", "99.25", "9.75", "143.75"];
+bookLastTitleObject.contentType = ContentType.graphicType;
+bookLastTitleObject.place(bookLastTitle);
+bookLastTitleObject.fit(FitOptions.proportionally);
 
 
 // book stats
