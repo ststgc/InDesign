@@ -3,7 +3,8 @@
 // # Save images from server
 // -----------------------------------
 
-var checkExistsBookCover = new File(bookCoverImage)
+var bookCoverImageTitle = bookAssetsPath + bookData.book.title + "-bookCover.jpg";
+var checkExistsBookCover = new File(bookCoverImageTitle)
 
 if (!checkExistsBookCover.exists){
     saveImagesFromServer();
@@ -28,7 +29,6 @@ function saveImagesFromServer(){
 
     // Save bookcover image
     var bookCoverImageUrl = bookData.book.imageURL;
-    var bookCoverImageTitle = bookAssetsPath + bookId + "-bookCover.jpg";
     var f = downloadFile(bookCoverImageUrl, bookCoverImageTitle);
 
     // Save book QR image
