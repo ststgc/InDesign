@@ -24,18 +24,24 @@ with (myDocumentCover.documentPreferences){ // Create A5 document
 
 
 // Title
-var bookCoverTextObject = currentDocObject.textFrames.add();
+var bookCoverTitleObject = currentDocObject.textFrames.add();
+// var bookDataFilePath = bookDataFile.path.replace(/~/, "Macintosh HD/Users/shota");
+// var bookCoverTitlePath = bookDataFilePath + "/img/" + "bookCoverTitle.png";
+
+
 var bookCoverTitleY1 = 22.864;
 var bookCoverTitleX1 = bookCoverSinglePageWidth + bookSpineWidth + 29.597;
-var bookCoverTitleY2 = 31.087;
-var bookCoverTitleX2 = bookCoverSinglePageWidth + bookSpineWidth + 118.402;
-var bookCoverTitle = bookData.book.title;
-bookCoverTextObject.visibleBounds = [bookCoverTitleY1, bookCoverTitleX1, bookCoverTitleY2, bookCoverTitleX2];
-bookCoverTextObject.contents = bookCoverTitle;
-bookCoverTextObject.paragraphs[0].justification = Justification.leftAlign;
-bookCoverTextObject.paragraphs[0].pointSize = "30Q";
-bookCoverTextObject.paragraphs[0].appliedFont = fontGennokakuGothic;
-bookCoverTextObject.paragraphs[0].fontStyle = "Medium";
+var bookCoverTitleY2 = 30.881;
+var bookCoverTitleX2 = bookCoverSinglePageWidth + bookSpineWidth + 307.45;
+bookCoverTitleObject.visibleBounds = [bookCoverTitleY1, bookCoverTitleX1, bookCoverTitleY2, bookCoverTitleX2];
+// bookCoverTitle.contentType = ContentType.graphicType;
+// bookCoverTitle.place(bookCoverTitlePath);
+// bookCoverTitle.fit(FitOptions.proportionally);
+bookCoverTitleObject.contents = bookData.book.title;
+bookCoverTitleObject.paragraphs[0].justification = Justification.leftAlign;
+bookCoverTitleObject.paragraphs[0].pointSize = "30Q";
+bookCoverTitleObject.paragraphs[0].appliedFont = fontGennokakuGothic;
+bookCoverTitleObject.paragraphs[0].fontStyle = "Medium";
 
 
 // Author
@@ -104,30 +110,6 @@ poinTaglineObject.paragraphs[0].justification = Justification.leftAlign;
 poinTaglineObject.paragraphs[0].pointSize = "12Q";
 poinTaglineObject.paragraphs[0].appliedFont = fontAvenirNext;
 poinTaglineObject.paragraphs[0].fontStyle = "Regular";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -17,6 +17,79 @@ var checkExistsDetailLeft, checkExistsDetailRight;
 var i, root, pageItemPositionCurrent, pageItemCurrentObject;
 
 
+var pageLeft = {
+    pageItemPageNumberLeftY1: "4.75",
+    pageItemPageNumberLeftX1: "4.25",
+    pageItemPageNumberLeftY2: "9.75",
+    pageItemPageNumberLeftX2: "11.95",
+    pageItemBookTitleLeftObjectY1: "3",
+    pageItemBookTitleLeftObjectX1: "12",
+    pageItemBookTitleLeftObjectY2: "8",
+    pageItemBookTitleLeftObjectX2: "139.75",
+    pageItemImageObjectY1: "9.75",
+    pageItemImageObjectX1: "4.25",
+    pageItemImageObjectY2: "145.184",
+    pageItemImageObjectX2: "139.75",
+    pageItemTitleObjectY1: "147.35",
+    pageItemTitleObjectX1: "4",
+    pageItemTitleObjectY2: "154.75",
+    pageItemTitleObjectX2: "139.75",
+    pageItemDateObjectY1: "155.5",
+    pageItemDateObjectX1: "4.499",
+    pageItemDateObjectY2: "158.5",
+    pageItemDateObjectX2: "70.375",
+    pageItemDetailLeftObjectY1: "159.75",
+    pageItemDetailLeftObjectX1: "3.75",
+    pageItemDetailLeftObjectY2: "205.25",
+    pageItemDetailLeftObjectX2: "69.875",
+    pageItemDetailRightObjectY1: "159.75",
+    pageItemDetailRightObjectX1: "73.125",
+    pageItemDetailRightObjectY2: "205.25",
+    pageItemDetailRightObjectX2: "139.25",
+    pageItemAuthorObjectY1: "155.55",
+    pageItemAuthorObjectX1: "19.5",
+    pageItemAuthorObjectY2: "159",
+    pageItemAuthorObjectX2: "70.375"
+};
+
+
+var pageRight = {
+    pageItemPageNumberRightY1: "4.5",
+    pageItemPageNumberRightX1: "136.15",
+    pageItemPageNumberRightY2: "9.5",
+    pageItemPageNumberRightX2: "143.85",
+    pageItemBookTitleRightObjectY1: "2.75",
+    pageItemBookTitleRightObjectX1: "8.3",
+    pageItemBookTitleRightObjectY2: "7.75",
+    pageItemBookTitleRightObjectX2: "136.15",
+    pageItemImageObjectY1: "9.5",
+    pageItemImageObjectX1: "8.25",
+    pageItemImageObjectY2: "144.934",
+    pageItemImageObjectX2: "143.75",
+    pageItemTitleObjectY1: "147.35",
+    pageItemTitleObjectX1: "8.25",
+    pageItemTitleObjectY2: "154.75",
+    pageItemTitleObjectX2: "143.75",
+    pageItemDateObjectY1: "155.5",
+    pageItemDateObjectX1: "8.687",
+    pageItemDateObjectY2: "158.5",
+    pageItemDateObjectX2: "74.813",
+    pageItemDetailLeftObjectY1: "159.75",
+    pageItemDetailLeftObjectX1: "7.938",
+    pageItemDetailLeftObjectY2: "205.25",
+    pageItemDetailLeftObjectX2: "74.063",
+    pageItemDetailRightObjectY1: "159.75",
+    pageItemDetailRightObjectX1: "77.375",
+    pageItemDetailRightObjectY2: "205.25",
+    pageItemDetailRightObjectX2: "143.5",
+    pageItemAuthorObjectY1: "155.55",
+    pageItemAuthorObjectX1: "23.3",
+    pageItemAuthorObjectY2: "159.25",
+    pageItemAuthorObjectX2: "74.375"
+};
+
+
+
 // Create pages
 for (i = 0; i < bookData.pages.length; i++){
     myPages.add(); // create a new page
@@ -78,21 +151,21 @@ for (i = 0; i < bookData.pages.length; i++){
 
 
 
-        pageItemPageNumberLeft.visibleBounds = ["4.75mm", "4.25mm", "9.75mm", "11.95mm"];
-        pageItemBookTitleLeftObject.visibleBounds = ["3mm", "12mm", "8mm", "139.75mm"];
-        pageItemImageObject.visibleBounds = ["9.75mm", "4.25mm", "145.184mm", "139.75mm"];
+        pageItemPageNumberLeft.visibleBounds = [pageLeft.pageItemPageNumberLeftY1, pageLeft.pageItemPageNumberLeftX1, pageLeft.pageItemPageNumberLeftY2, pageLeft.pageItemPageNumberLeftX2];
+        pageItemBookTitleLeftObject.visibleBounds = [pageLeft.pageItemBookTitleLeftObjectY1, pageLeft.pageItemBookTitleLeftObjectX1, pageLeft.pageItemBookTitleLeftObjectY2, pageLeft.pageItemBookTitleLeftObjectX2];
+        pageItemImageObject.visibleBounds = [pageLeft.pageItemImageObjectY1, pageLeft.pageItemImageObjectX1, pageLeft.pageItemImageObjectY2, pageLeft.pageItemImageObjectX2];
 
         if (flags.pageTitle === true){
-            pageItemTitleObject.visibleBounds = ["147.35mm", "4mm", "154.75mm", "139.75mm"];
-            pageItemDateObject.visibleBounds = ["155.5mm", "4.499mm", "158.5mm", "70.375mm"];
+            pageItemTitleObject.visibleBounds = [pageLeft.pageItemTitleObjectY1, pageLeft.pageItemTitleObjectX1, pageLeft.pageItemTitleObjectY2, pageLeft.pageItemTitleObjectX2];
+            pageItemDateObject.visibleBounds = [pageLeft.pageItemDateObjectY1, pageLeft.pageItemDateObjectX1, pageLeft.pageItemDateObjectY2, pageLeft.pageItemDateObjectX2];
 
             if (flags.pageDescription === true){
-                pageItemDetailLeftObject.visibleBounds = ["159.75mm", "3.75mm", "205.25mm", "69.875mm"];
-                pageItemDetailRightObject.visibleBounds = ["159.75mm", "73.125mm", "205.25mm", "139.25mm"];
+                pageItemDetailLeftObject.visibleBounds = [pageLeft.pageItemDetailLeftObjectY1, pageLeft.pageItemDetailLeftObjectX1, pageLeft.pageItemDetailLeftObjectY2, pageLeft.pageItemDetailLeftObjectX2];
+                pageItemDetailRightObject.visibleBounds = [pageLeft.pageItemDetailRightObjectY1, pageLeft.pageItemDetailRightObjectX1, pageLeft.pageItemDetailRightObjectY2, pageLeft.pageItemDetailRightObjectX2];
             }
 
             if (bookData.contributors.length != 0) {
-                pageItemAuthorObject.visibleBounds = ["155.55mm", "19.5mm", "159mm", "70.375mm"];
+                pageItemAuthorObject.visibleBounds = [pageLeft.pageItemAuthorObjectY1, pageLeft.pageItemAuthorObjectX1, pageLeft.pageItemAuthorObjectY2, pageLeft.pageItemAuthorObjectX2];
             }
         }
 
@@ -132,21 +205,21 @@ for (i = 0; i < bookData.pages.length; i++){
 
 
 
-        pageItemPageNumberRight.visibleBounds = ["4.5mm", "136.15mm", "9.5mm", "143.85mm"];
-        pageItemBookTitleRightObject.visibleBounds = ["2.75mm", "8.3mm", "7.75mm", "136.15mm"];
-        pageItemImageObject.visibleBounds = ["9.5mm", "8.25mm", "144.934mm", "143.75mm"];
+        pageItemPageNumberRight.visibleBounds = [pageRight.pageItemPageNumberRightY1, pageRight.pageItemPageNumberRightX1, pageRight.pageItemPageNumberRightY2, pageRight.pageItemPageNumberRightX2];
+        pageItemBookTitleRightObject.visibleBounds = [pageRight.pageItemBookTitleRightObjectY1, pageRight.pageItemBookTitleRightObjectX1, pageRight.pageItemBookTitleRightObjectY2, pageRight.pageItemBookTitleRightObjectX2];
+        pageItemImageObject.visibleBounds = [pageRight.pageItemImageObjectY1, pageRight.pageItemImageObjectX1, pageRight.pageItemImageObjectY2, pageRight.pageItemImageObjectX2];
 
         if (flags.pageTitle === true){
-            pageItemTitleObject.visibleBounds = ["147.35mm", "8.25mm", "154.75mm", "143.75mm"];
-            pageItemDateObject.visibleBounds = ["155.5mm", "8.687mm", "158.5mm", "74.813mm"];
+            pageItemTitleObject.visibleBounds = [pageRight.pageItemTitleObjectY1, pageRight.pageItemTitleObjectX1, pageRight.pageItemTitleObjectY2, pageRight.pageItemTitleObjectX2];
+            pageItemDateObject.visibleBounds = [pageRight.pageItemDateObjectY1, pageRight.pageItemDateObjectX1, pageRight.pageItemDateObjectY2, pageRight.pageItemDateObjectX2];
 
             if (flags.pageDescription === true){
-                pageItemDetailLeftObject.visibleBounds = ["159.75mm", "7.938mm", "205.25mm", "74.063mm"];
-                pageItemDetailRightObject.visibleBounds = ["159.75mm", "77.375mm", "205.25mm", "143.5mm"];
+                pageItemDetailLeftObject.visibleBounds = [pageRight.pageItemDetailLeftObjectY1, pageRight.pageItemDetailLeftObjectX1, pageRight.pageItemDetailLeftObjectY2, pageRight.pageItemDetailLeftObjectX2];
+                pageItemDetailRightObject.visibleBounds = [pageRight.pageItemDetailRightObjectY1, pageRight.pageItemDetailRightObjectX1, pageRight.pageItemDetailRightObjectY2, pageRight.pageItemDetailRightObjectX2];
+            }
 
-                if (bookData.contributors.length != 0) {
-                    pageItemAuthorObject.visibleBounds = ["155.5mm", "23.3mm", "159.25mm", "74.375mm"];
-                }
+            if (bookData.contributors.length != 0) {
+                pageItemAuthorObject.visibleBounds = [pageRight.pageItemAuthorObjectY1, pageRight.pageItemAuthorObjectX1, pageRight.pageItemAuthorObjectY2, pageRight.pageItemAuthorObjectX2];
             }
         }
 
