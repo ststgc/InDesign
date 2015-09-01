@@ -31,6 +31,16 @@ for (var i = 0; i < app.documents.length; i++){
 bookDataFile.close(); // Close the file after reading
 
 
+// # Close all documents with saving nothing.
+//   because PDF creating script is just looking
+//   the document its active.
+//
+//   http://stackoverflow.com/questions/11563021/how-to-close-hidden-indesign-documents
+// -----------------------------------------------
+
+app.documents.everyItem().close(SaveOptions.NO);
+
+
 
 // # Tell operator that your work is done
 // -----------------------------------------------
@@ -42,15 +52,4 @@ alert(
   + "- Descriptionが長いページ\n"
   + "- テキストの配置位置・サイズ\n"
 );
-
-
-
-
-// # Close active documents with saving nothing
-// -----------------------------------------------
-
-// for (var i = 0; i < app.documents.length; i++){
-//   app.documents[i].select.exit(saveOptions.no);
-// }
-
 
