@@ -5,8 +5,7 @@ var pageItemBookTitleObject;
 var pageItemImageObject;
 var pageItemTitleObject;
 var pageItemDateObject;
-var pageItemDetailLeftObject;
-var pageItemDetailRightObject;
+var pageItemDetail;
 var pageItemAuthorObject;
 var pageItemImagePath;
 var pageItemPath;
@@ -28,24 +27,20 @@ var pageLeft = {
     pageItemBookTitleLeftObjectX2: "139.75",
     pageItemImageObjectY1: "9.75",
     pageItemImageObjectX1: "4.25",
-    pageItemImageObjectY2: "145.184",
-    pageItemImageObjectX2: "139.75",
-    pageItemTitleObjectY1: "147.35",
+    pageItemImageObjectY2: "139.187",
+    pageItemImageObjectX2: "133.75",
+    pageItemTitleObjectY1: "141.35",
     pageItemTitleObjectX1: "4",
-    pageItemTitleObjectY2: "154.75",
-    pageItemTitleObjectX2: "139.75",
-    pageItemDateObjectY1: "155.5",
+    pageItemTitleObjectY2: "148.75",
+    pageItemTitleObjectX2: "133.75",
+    pageItemDateObjectY1: "149.5",
     pageItemDateObjectX1: "4.499",
-    pageItemDateObjectY2: "158.5",
+    pageItemDateObjectY2: "152.5",
     pageItemDateObjectX2: "70.375",
-    pageItemDetailLeftObjectY1: "159.75",
-    pageItemDetailLeftObjectX1: "3.75",
-    pageItemDetailLeftObjectY2: "205.25",
-    pageItemDetailLeftObjectX2: "69.875",
-    pageItemDetailRightObjectY1: "159.75",
-    pageItemDetailRightObjectX1: "73.125",
-    pageItemDetailRightObjectY2: "205.25",
-    pageItemDetailRightObjectX2: "139.25",
+    pageItemDetailObjectY1: "153.75",
+    pageItemDetailObjectX1: "4.25",
+    pageItemDetailObjectY2: "205.75",
+    pageItemDetailObjectX2: "133.7",
     pageItemAuthorObjectY1: "155.55",
     pageItemAuthorObjectX1: "19.5",
     pageItemAuthorObjectY2: "159",
@@ -63,25 +58,21 @@ var pageRight = {
     pageItemBookTitleRightObjectY2: "7.75",
     pageItemBookTitleRightObjectX2: "136.15",
     pageItemImageObjectY1: "9.5",
-    pageItemImageObjectX1: "8.25",
-    pageItemImageObjectY2: "144.934",
+    pageItemImageObjectX1: "14.25",
+    pageItemImageObjectY2: "138.937",
     pageItemImageObjectX2: "143.75",
-    pageItemTitleObjectY1: "147.35",
-    pageItemTitleObjectX1: "8.25",
-    pageItemTitleObjectY2: "154.75",
-    pageItemTitleObjectX2: "143.75",
-    pageItemDateObjectY1: "155.5",
-    pageItemDateObjectX1: "8.687",
-    pageItemDateObjectY2: "158.5",
-    pageItemDateObjectX2: "74.813",
-    pageItemDetailLeftObjectY1: "159.75",
-    pageItemDetailLeftObjectX1: "7.938",
-    pageItemDetailLeftObjectY2: "205.25",
-    pageItemDetailLeftObjectX2: "74.063",
-    pageItemDetailRightObjectY1: "159.75",
-    pageItemDetailRightObjectX1: "77.375",
-    pageItemDetailRightObjectY2: "205.25",
-    pageItemDetailRightObjectX2: "143.5",
+    pageItemTitleObjectY1: "141.35",
+    pageItemTitleObjectX1: "14.25",
+    pageItemTitleObjectY2: "148.75",
+    pageItemTitleObjectX2: "144",
+    pageItemDateObjectY1: "149.5",
+    pageItemDateObjectX1: "14.687",
+    pageItemDateObjectY2: "152.5",
+    pageItemDateObjectX2: "80.813",
+    pageItemDetailObjectY1: "153.75",
+    pageItemDetailObjectX1: "14.3",
+    pageItemDetailObjectY2: "205.75",
+    pageItemDetailObjectX2: "143.75",
     pageItemAuthorObjectY1: "155.55",
     pageItemAuthorObjectX1: "23.3",
     pageItemAuthorObjectY2: "159.25",
@@ -106,8 +97,7 @@ for (i = 0; i < bookData.pages.length; i++){
         bookTitleRight: root + "bookTitleForPage_Right.png",
         image: bookAssetsPath + bookData.pages[i].pageId + ".jpg",
         title: rootPage + "/title.png",
-        detailLeft: rootPage + "/left.png",
-        detailRight: rootPage + "/right.png"
+        detail: rootPage + "/description.png"
     };
 
 
@@ -120,8 +110,7 @@ for (i = 0; i < bookData.pages.length; i++){
     }
 
     if (flags.pageDescription === true){
-        pageItemDetailLeftObject = pageItemCurrentObject.textFrames.add();
-        pageItemDetailRightObject = pageItemCurrentObject.textFrames.add();
+        pageItemDetailObject = pageItemCurrentObject.textFrames.add();
     }
 
 
@@ -160,16 +149,13 @@ for (i = 0; i < bookData.pages.length; i++){
             pageItemDateObject.visibleBounds = [pageLeft.pageItemDateObjectY1, pageLeft.pageItemDateObjectX1, pageLeft.pageItemDateObjectY2, pageLeft.pageItemDateObjectX2];
 
             if (flags.pageDescription === true){
-                pageItemDetailLeftObject.visibleBounds = [pageLeft.pageItemDetailLeftObjectY1, pageLeft.pageItemDetailLeftObjectX1, pageLeft.pageItemDetailLeftObjectY2, pageLeft.pageItemDetailLeftObjectX2];
-                pageItemDetailRightObject.visibleBounds = [pageLeft.pageItemDetailRightObjectY1, pageLeft.pageItemDetailRightObjectX1, pageLeft.pageItemDetailRightObjectY2, pageLeft.pageItemDetailRightObjectX2];
+                pageItemDetailObject.visibleBounds = [pageLeft.pageItemDetailObjectY1, pageLeft.pageItemDetailObjectX1, pageLeft.pageItemDetailObjectY2, pageLeft.pageItemDetailObjectX2];
             }
 
             if (bookData.contributors.length != 0) {
                 pageItemAuthorObject.visibleBounds = [pageLeft.pageItemAuthorObjectY1, pageLeft.pageItemAuthorObjectX1, pageLeft.pageItemAuthorObjectY2, pageLeft.pageItemAuthorObjectX2];
             }
         }
-
-
 
         // Set page number for Left Page
         pageItemPageNumberLeft.contents = (i + 1).toString(); // because its starts from zero
@@ -203,8 +189,6 @@ for (i = 0; i < bookData.pages.length; i++){
         pageItemPageNumberRight = pageItemCurrentObject.textFrames.add();
         pageItemBookTitleRightObject = pageItemCurrentObject.textFrames.add();
 
-
-
         pageItemPageNumberRight.visibleBounds = [pageRight.pageItemPageNumberRightY1, pageRight.pageItemPageNumberRightX1, pageRight.pageItemPageNumberRightY2, pageRight.pageItemPageNumberRightX2];
         pageItemBookTitleRightObject.visibleBounds = [pageRight.pageItemBookTitleRightObjectY1, pageRight.pageItemBookTitleRightObjectX1, pageRight.pageItemBookTitleRightObjectY2, pageRight.pageItemBookTitleRightObjectX2];
         pageItemImageObject.visibleBounds = [pageRight.pageItemImageObjectY1, pageRight.pageItemImageObjectX1, pageRight.pageItemImageObjectY2, pageRight.pageItemImageObjectX2];
@@ -214,8 +198,7 @@ for (i = 0; i < bookData.pages.length; i++){
             pageItemDateObject.visibleBounds = [pageRight.pageItemDateObjectY1, pageRight.pageItemDateObjectX1, pageRight.pageItemDateObjectY2, pageRight.pageItemDateObjectX2];
 
             if (flags.pageDescription === true){
-                pageItemDetailLeftObject.visibleBounds = [pageRight.pageItemDetailLeftObjectY1, pageRight.pageItemDetailLeftObjectX1, pageRight.pageItemDetailLeftObjectY2, pageRight.pageItemDetailLeftObjectX2];
-                pageItemDetailRightObject.visibleBounds = [pageRight.pageItemDetailRightObjectY1, pageRight.pageItemDetailRightObjectX1, pageRight.pageItemDetailRightObjectY2, pageRight.pageItemDetailRightObjectX2];
+                pageItemDetailObject.visibleBounds = [pageRight.pageItemDetailObjectY1, pageRight.pageItemDetailObjectX1, pageRight.pageItemDetailObjectY2, pageRight.pageItemDetailObjectX2];
             }
 
             if (bookData.contributors.length != 0) {
@@ -285,20 +268,20 @@ for (i = 0; i < bookData.pages.length; i++){
             // Place page detail
             if (bookData.pages[i].description) {
 
-                checkExistsDetailLeft = new File(pageItemImagePath.detailLeft);
-                checkExistsDetailRight = new File(pageItemImagePath.detailRight);
-                // if detail on the left exists or not
-                if (checkExistsDetailLeft.exists) {
-                    pageItemDetailLeftObject.contentType = ContentType.graphicType;
-                    pageItemDetailLeftObject.place(pageItemImagePath.detailLeft);
-                    pageItemDetailLeftObject.fit(FitOptions.proportionally);
+                checkExistsDetail = new File(pageItemImagePath.detail);
+                // checkExistsDetail = new File(pageItemImagePath.detail);
+                // if detail on the  exists or not
+                if (checkExistsDetail.exists) {
+                    pageItemDetailObject.contentType = ContentType.graphicType;
+                    pageItemDetailObject.place(pageItemImagePath.detail);
+                    pageItemDetailObject.fit(FitOptions.proportionally);
 
-                    // if detail on the right exists or not
-                    if (checkExistsDetailRight.exists) {
-                        pageItemDetailRightObject.contentType = ContentType.graphicType;
-                        pageItemDetailRightObject.place(pageItemImagePath.detailRight);
-                        pageItemDetailRightObject.fit(FitOptions.proportionally);
-                    }
+                    // // if detail on the  exists or not
+                    // if (checkExistsDetail.exists) {
+                    //     pageItemDetailObject.contentType = ContentType.graphicType;
+                    //     pageItemDetailObject.place(pageItemImagePath.detail);
+                    //     pageItemDetailObject.fit(FitOptions.proportionally);
+                    // }
                 }
             }
         }
