@@ -16,16 +16,16 @@ function saveImagesFromServer(){
     var downloadTimePerPage = .128;
     var downloadEstimatedTime = Math.floor((2 + bookData.pages.length)*downloadTimePerPage);
 
-    alert(
-        "画像ダウンロードを開始します"
-        + "（約" + downloadEstimatedTime + "秒)\n\n"
-        + "以下の画像を"
-        + bookAssetsPath
-        + "にDLします。\n\n"
-        + "- " + "ブックカバー写真\n"
-        + "- " + "ブックのQR画像\n"
-        + "- " + bookData.pages.length + '枚のページ写真'
-    );
+    // alert(
+    //     "画像ダウンロードを開始します"
+    //     + "（約" + downloadEstimatedTime + "秒)\n\n"
+    //     + "以下の画像を"
+    //     + bookAssetsPath
+    //     + "にDLします。\n\n"
+    //     + "- " + "ブックカバー写真\n"
+    //     + "- " + "ブックのQR画像\n"
+    //     + "- " + bookData.pages.length + '枚のページ写真'
+    // );
 
     // Save bookcover image
     var bookCoverImageUrl = bookData.book.imageURL;
@@ -49,16 +49,16 @@ function saveImagesFromServer(){
         f = downloadFile(pageImageUrl, pageImageTitle);
     }
 
-    alert(
-        "画像ダウンロードが完了しました\n"
-        + "以下の画像を"
-        + bookAssetsPath
-        + "にDLしました。\n\n"
-        + "- " + "ブックカバー写真\n"
-        + "- " + "ブックのQR画像\n"
-        + "- " + bookData.pages.length + '枚のページ写真\n\n'
-        + 'これより、文字・写真データをレイアウトに流し込みます。'
-    );
+    // alert(
+    //     "画像ダウンロードが完了しました\n"
+    //     + "以下の画像を"
+    //     + bookAssetsPath
+    //     + "にDLしました。\n\n"
+    //     + "- " + "ブックカバー写真\n"
+    //     + "- " + "ブックのQR画像\n"
+    //     + "- " + bookData.pages.length + '枚のページ写真\n\n'
+    //     + 'これより、文字・写真データをレイアウトに流し込みます。'
+    // );
 
     //HTTPレスポンスを得る
     function getHttpResponse(requests) {
