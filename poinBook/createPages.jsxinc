@@ -41,10 +41,10 @@ var pageLeft = {
     pageItemDetailObjectX1: "4.25",
     pageItemDetailObjectY2: "205.75",
     pageItemDetailObjectX2: "133.7",
-    pageItemAuthorObjectY1: "155.55",
-    pageItemAuthorObjectX1: "19.5",
-    pageItemAuthorObjectY2: "159",
-    pageItemAuthorObjectX2: "70.375"
+    pageItemAuthorObjectY1: "149.5",
+    pageItemAuthorObjectX1: "20",
+    pageItemAuthorObjectY2: "152.95",
+    pageItemAuthorObjectX2: "70.875"
 };
 
 
@@ -73,10 +73,10 @@ var pageRight = {
     pageItemDetailObjectX1: "14.3",
     pageItemDetailObjectY2: "205.75",
     pageItemDetailObjectX2: "143.75",
-    pageItemAuthorObjectY1: "155.55",
-    pageItemAuthorObjectX1: "23.3",
-    pageItemAuthorObjectY2: "159.25",
-    pageItemAuthorObjectX2: "74.375"
+    pageItemAuthorObjectY1: "149.55",
+    pageItemAuthorObjectX1: "30",
+    pageItemAuthorObjectY2: "153.25",
+    pageItemAuthorObjectX2: "81.075"
 };
 
 
