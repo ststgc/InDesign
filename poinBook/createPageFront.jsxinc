@@ -16,6 +16,7 @@ var pageFront = currentDoc.pages.item(0);
 
 
 // Set path
+// var bookDataFilePath = bookDataFile.path.replace(/~/, "Macintosh HD/Users/shota");
 var bookDataFilePath = bookDataFile.path.replace(/~/, "Macintosh HD/Users/shota");
 var root = bookDataFilePath + "/img/";
 var pageFrontImagePath = {

@@ -1,6 +1,7 @@
 // Last page (title, author, stats, and QR code)
 // ----------------------------------------------
 
+
 // Create new page
 myPages.add();
 var pageLastPosition = 1 + bookData.pages.length;
@@ -83,10 +84,22 @@ var ownerCreatedDateDate = RegExp.$3;
 var ownerCreatedDateString = ownerCreatedDateYear + "/" + ownerCreatedDateMonth + "/" + ownerCreatedDateDate;
 
 
+// Set path
+// var bookDataFilePath = bookDataFile.path.replace(/~/, "Macintosh HD/Users/shota");
+var bookDataFilePath = bookDataFile.path.replace(/~/, "Macintosh HD/Users/shota");
+var root = bookDataFilePath + "/img/";
+var imageBookStatsAuthorName = root + "bookStatsAuthorName.png";
+var bookStatsAuthorObject = pageItemCurrentObject.textFrames.add();
+bookStatsAuthorObject.visibleBounds = [10.75, 115.3, 14.8, 143.75];
+bookStatsAuthorObject.contentType = ContentType.graphicType;
+bookStatsAuthorObject.place(imageBookStatsAuthorName);
+bookStatsAuthorObject.fit(FitOptions.proportionally);
+
+
 bookColophon.contents =
     "Author & text: "
-    + bookData.owner.name
-    + "\nPublished with: Poin Books"
+    + bookStatsAuthorObject
+    "Published with: Poin Books"
     + "\nBook created: "
     + bookCreatedDateString
     + "\nPoin user since: "
