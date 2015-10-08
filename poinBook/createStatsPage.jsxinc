@@ -84,22 +84,17 @@ var ownerCreatedDateDate = RegExp.$3;
 var ownerCreatedDateString = ownerCreatedDateYear + "/" + ownerCreatedDateMonth + "/" + ownerCreatedDateDate;
 
 
-// Set path
-// var bookDataFilePath = bookDataFile.path.replace(/~/, "Macintosh HD/Users/shota");
-var bookDataFilePath = bookDataFile.path.replace(/~/, "Macintosh HD/Users/shota");
-var root = bookDataFilePath + "/img/";
-var imageBookStatsAuthorName = root + "bookStatsAuthorName.png";
-var bookStatsAuthorObject = pageItemCurrentObject.textFrames.add();
+// Set Author name
+var bookStatsAuthorObject = pageLast.textFrames.add();
+var bookStatsAuthorPath = bookDataFilePath + "/img/bookStatsAuthorName.png";
 bookStatsAuthorObject.visibleBounds = [10.75, 115.3, 14.8, 143.75];
 bookStatsAuthorObject.contentType = ContentType.graphicType;
-bookStatsAuthorObject.place(imageBookStatsAuthorName);
+bookStatsAuthorObject.place(bookStatsAuthorPath);
 bookStatsAuthorObject.fit(FitOptions.proportionally);
-
 
 bookColophon.contents =
     "Author & text: "
-    + bookStatsAuthorObject
-    "Published with: Poin Books"
+    + "\nPublished with: Poin Books"
     + "\nBook created: "
     + bookCreatedDateString
     + "\nPoin user since: "

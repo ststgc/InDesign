@@ -38,7 +38,7 @@ bookDataFile.close(); // Close the file after reading
 //   http://stackoverflow.com/questions/11563021/how-to-close-hidden-indesign-documents
 // -----------------------------------------------
 
-// app.documents.everyItem().close(SaveOptions.NO);
+app.documents.everyItem().close(SaveOptions.NO);
 
 
 
