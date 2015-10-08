@@ -87,7 +87,7 @@ var ownerCreatedDateString = ownerCreatedDateYear + "/" + ownerCreatedDateMonth 
 // Set Author name
 var bookStatsAuthorObject = pageLast.textFrames.add();
 var bookStatsAuthorPath = bookDataFilePath + "/img/bookStatsAuthorName.png";
-bookStatsAuthorObject.visibleBounds = [10.75, 115.3, 14.8, 143.75];
+bookStatsAuthorObject.visibleBounds = [10.75, 115.3, 14.93, 143.75];
 bookStatsAuthorObject.contentType = ContentType.graphicType;
 bookStatsAuthorObject.place(bookStatsAuthorPath);
 bookStatsAuthorObject.fit(FitOptions.proportionally);
