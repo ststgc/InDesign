@@ -61,9 +61,26 @@ if (bookData.stats.follower > statsHappyLine || bookData.stats.reaction > statsH
     // book colophon
     bookColophon.visibleBounds = ["21.6mm", "99.417mm", "53mm", "143.75mm"];
 
+    // Set Author name
+    var bookStatsAuthorObject = pageLast.textFrames.add();
+    var bookStatsAuthorPath = bookDataFilePath + "/img/bookStatsAuthorName.png";
+    bookStatsAuthorObject.visibleBounds = [20.5, 115.3, 24.68, 143.75];
+    bookStatsAuthorObject.contentType = ContentType.graphicType;
+    bookStatsAuthorObject.place(bookStatsAuthorPath);
+    bookStatsAuthorObject.fit(FitOptions.proportionally);
+
+
 } else {
     // book colophon
     bookColophon.visibleBounds = ["11.99mm", "99.417mm", "53mm", "143.75mm"];
+
+    // Set Author name
+    var bookStatsAuthorObject = pageLast.textFrames.add();
+    var bookStatsAuthorPath = bookDataFilePath + "/img/bookStatsAuthorName.png";
+    bookStatsAuthorObject.visibleBounds = [10.75, 115.3, 14.93, 143.75];
+    bookStatsAuthorObject.contentType = ContentType.graphicType;
+    bookStatsAuthorObject.place(bookStatsAuthorPath);
+    bookStatsAuthorObject.fit(FitOptions.proportionally);
 }
 
 
@@ -84,13 +101,7 @@ var ownerCreatedDateDate = RegExp.$3;
 var ownerCreatedDateString = ownerCreatedDateYear + "/" + ownerCreatedDateMonth + "/" + ownerCreatedDateDate;
 
 
-// Set Author name
-var bookStatsAuthorObject = pageLast.textFrames.add();
-var bookStatsAuthorPath = bookDataFilePath + "/img/bookStatsAuthorName.png";
-bookStatsAuthorObject.visibleBounds = [10.75, 115.3, 14.93, 143.75];
-bookStatsAuthorObject.contentType = ContentType.graphicType;
-bookStatsAuthorObject.place(bookStatsAuthorPath);
-bookStatsAuthorObject.fit(FitOptions.proportionally);
+
 
 bookColophon.contents =
     "Author & text: "
